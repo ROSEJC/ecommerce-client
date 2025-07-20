@@ -2,7 +2,7 @@ import React from "react";
 import ContactCard from "./ContactCard";
 const Footer = () => {
   return (
-    <div>
+    <footer>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 border-b-2">
         <div className="bg-white-100">
           <ContactCard
@@ -30,7 +30,7 @@ const Footer = () => {
         © 2025 <span className="font-bold text-black">ROSEJC</span>. All rights
         reserved.
       </div>
-    </div>
+    </footer>
   );
 };
 export default Footer;
