@@ -6,7 +6,7 @@ const CategoryCard = ({ category }) => {
       <button className="p-0 m-0 border-none bg-transparent hover:none focus:outline-none">
         <img
           src="/airpod.png"
-          className="h-20 w-auto border border-green-300 hover:border-green-400 hover:scale-105 transition-transform duration-300 ease-in-out"
+          className="h-20 w-auto border border-green-300 hover:border-green-400 group-hover:scale-105 transition-transform duration-300 ease-in-out"
         />
       </button>
 

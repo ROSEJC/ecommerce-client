@@ -1,0 +1,163 @@
+import React, { useState } from "react";
+
+const SidebarFilter = () => {
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedBrand, setSelectedBrand] = useState("");
+  const [selectedPrice, setSelectedPrice] = useState("");
+
+  const productCategories = [
+    "Kitchen Appliances",
+    "Television",
+    "Refrigerators",
+    "Washing Machine",
+    "Tablets",
+    "gadget accessories",
+    "Appliances",
+    "Air Conditioners",
+    "Airbuds",
+    "Cameras",
+    "Smartphones",
+    "Mobiles",
+    "Smart Watches",
+  ];
+
+  const brands = [
+    "Hi-Tech Limited",
+    "hp Limited",
+    "The Apple Limited",
+    "A4 Tech",
+    "The Hitachi Limited",
+    "Huawei Company",
+    "IKEA Limited",
+    "Sony Limited",
+  ];
+
+  const prices = [
+    "Under $100",
+    "$100 - $200",
+    "$200 - $300",
+    "$300 - $500",
+    "Over $500",
+  ];
+
+  return (
+    <div className="text-sm font-medium space-y-6 max-w-xs mb-10 mt-5">
+      {/* Product Categories */}
+      <div>
+        <p className="mb-2 font-semibold text-lg">Product Categories</p>
+        <div className="space-y-2">
+          {productCategories.map((category) => (
+            <label
+              key={category}
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              <input
+                type="radio"
+                name="category"
+                value={category}
+                checked={selectedCategory === category}
+                onChange={() => {
+                  setSelectedCategory(category);
+                  console.log("Bạn vừa chọn:", category);
+                  setSelectedCategory(category);
+                }}
+                className="hidden peer"
+              />
+              <div className="w-5 h-5 rounded-sm border border-black flex items-center justify-center peer-checked:bg-blue-500"></div>
+              <div className="hidden peer-checked:block  text-white text-sm leading-none">
+                ✓
+              </div>
+              <span className="peer-checked:font-bold">{category}</span>
+            </label>
+          ))}
+        </div>
+        {selectedCategory !== "" && (
+          <button
+            onClick={() => setSelectedCategory("")}
+            className="mt-2 text-blue-500 text-xs hover:underline"
+          >
+            Reset selection
+          </button>
+        )}
+      </div>
+
+      {/* Brands */}
+      <div>
+        <p className="mb-2 font-semibold text-lg">Brands</p>
+        <div className="space-y-2">
+          {brands.map((brand) => (
+            <label
+              key={brand}
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              <input
+                type="radio"
+                name="brand"
+                value={brand}
+                checked={selectedBrand === brand}
+                onChange={() => {
+                  setSelectedBrand(brand);
+                  console.log("Bạn vừa chọn:", brand);
+                }}
+                className="hidden peer"
+              />
+              <div className="w-5 h-5 rounded-sm border border-black flex items-center justify-center peer-checked:bg-blue-500"></div>
+              <div className="hidden peer-checked:block  text-white text-sm leading-none">
+                ✓
+              </div>
+              <span className="peer-checked:font-bold">{brand}</span>
+            </label>
+          ))}
+        </div>
+        {selectedBrand !== "" && (
+          <button
+            onClick={() => setSelectedBrand("")}
+            className="mt-2 text-blue-500 text-xs hover:underline"
+          >
+            Reset selection
+          </button>
+        )}
+      </div>
+
+      {/* Price */}
+      <div>
+        <p className="mb-2 font-semibold text-lg">Brands</p>
+        <div className="space-y-2">
+          {prices.map((price) => (
+            <label
+              key={price}
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              <input
+                type="radio"
+                name="price"
+                value={price}
+                checked={selectedPrice === price}
+                onChange={() => {
+                  setSelectedPrice(price);
+                  console.log("Bạn vừa chọn:", price);
+                }}
+                className="hidden peer"
+              />
+              <div className="w-5 h-5 rounded-sm border border-black flex items-center justify-center peer-checked:bg-blue-500"></div>
+              <div className="hidden peer-checked:block  text-white text-sm leading-none">
+                ✓
+              </div>
+              <span className="peer-checked:font-bold">{price}</span>
+            </label>
+          ))}
+        </div>
+        {selectedPrice !== "" && (
+          <button
+            onClick={() => setSelectedPrice("")}
+            className="mt-2 text-blue-500 text-xs hover:underline"
+          >
+            Reset selection
+          </button>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default SidebarFilter;

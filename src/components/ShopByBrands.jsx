@@ -1,20 +1,37 @@
 import React from "react";
+import BrandLink from "./BrandLink";
 
-const CategoryCard = ({ category }) => {
+const ShopByBrands = () => {
+  const brands = [
+    "apple",
+    "bkav",
+    "hitachi",
+    "hp",
+    "huewei",
+    "ikea",
+    "samsung",
+    "sony",
+  ];
   return (
-    <div className="group w_full py-5 px-5 shadow-sm flex items-center space-x-4 max-w-lg overflow-hidden bg-gray-100">
-      <button className="p-0 m-0 border-none bg-transparent hover:none focus:outline-none">
-        <img
-          src="/airpod.png"
-          className="h-20 w-auto border border-green-300 hover:border-green-400 hover:scale-105 transition-transform duration-300 ease-in-out"
-        />
-      </button>
+    <div className="w-full my-10 space-y-10 bg-gray-50 py-10 px-10">
+      {/* card title*/}
+      <div className="flex justify-between">
+        <p className="text-3xl">
+          {" "}
+          <strong>Shop By Brands</strong>
+        </p>
+        <a href="/shop" className="text-black">
+          Views all
+        </a>
+      </div>
 
-      {/*Title*/}
-      <div className="text-lg">
-        <strong>{category}</strong>
+      {/*Brand Images*/}
+      <div className="flex justify-between space-x-2">
+        {brands.map((brand, index) => (
+          <BrandLink key={index} brandName={brand} />
+        ))}
       </div>
     </div>
   );
 };
-export default CategoryCard;
+export default ShopByBrands;
