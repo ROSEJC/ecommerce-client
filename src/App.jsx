@@ -8,23 +8,23 @@ import Footer from "./components/Footer";
 
 import Home from "./components/Home";
 import Shop from "./components/Shop";
+import LoginAndSignup from "./components/Login&Signup";
+import Detail from "./components/Details";
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <Router>
       <div className="bg-white-200 flex flex-col min-h-screen max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Header />
-
         <main>
           <Routes>
             <Route path="/home" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/login" element={<LoginAndSignup />} />
+            <Route path="/detail" element={<Detail />} />
             {/* thêm các route khác tại đây nếu cần */}
           </Routes>
         </main>
-
-        <Footer />
       </div>
     </Router>
   );

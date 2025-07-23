@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-
-const SidebarFilter = () => {
+import { useEffect } from "react";
+const SidebarFilter = ({ setChoices }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
@@ -33,13 +33,20 @@ const SidebarFilter = () => {
   ];
 
   const prices = [
-    "Under $100",
-    "$100 - $200",
-    "$200 - $300",
-    "$300 - $500",
-    "Over $500",
+    { label: "Under $100", min: 0, max: 100 },
+    { label: "$100 - $200", min: 100, max: 200 },
+    { label: "$200 - $300", min: 200, max: 300 },
+    { label: "$300 - $500", min: 300, max: 500 },
+    { label: "Over $500", min: 500, max: Infinity },
   ];
 
+  useEffect(() => {
+    setChoices({
+      category: selectedCategory,
+      brand: selectedBrand,
+      price: selectedPrice,
+    });
+  }, [selectedCategory, selectedBrand, selectedPrice, setChoices]);
   return (
     <div className="text-sm font-medium space-y-6 max-w-xs mb-10 mt-5">
       {/* Product Categories */}
@@ -121,18 +128,18 @@ const SidebarFilter = () => {
 
       {/* Price */}
       <div>
-        <p className="mb-2 font-semibold text-lg">Brands</p>
+        <p className="mb-2 font-semibold text-lg">Prices</p>
         <div className="space-y-2">
           {prices.map((price) => (
             <label
-              key={price}
+              key={price.label}
               className="flex items-center gap-2 cursor-pointer"
             >
               <input
                 type="radio"
                 name="price"
-                value={price}
-                checked={selectedPrice === price}
+                value={price.label}
+                checked={selectedPrice?.label === price.label}
                 onChange={() => {
                   setSelectedPrice(price);
                   console.log("Bạn vừa chọn:", price);
@@ -140,16 +147,17 @@ const SidebarFilter = () => {
                 className="hidden peer"
               />
               <div className="w-5 h-5 rounded-sm border border-black flex items-center justify-center peer-checked:bg-blue-500"></div>
-              <div className="hidden peer-checked:block  text-white text-sm leading-none">
+              <div className="hidden peer-checked:block text-white text-sm leading-none">
                 ✓
               </div>
-              <span className="peer-checked:font-bold">{price}</span>
+              <span className="peer-checked:font-bold">{price.label}</span>
             </label>
           ))}
         </div>
-        {selectedPrice !== "" && (
+
+        {selectedPrice && (
           <button
-            onClick={() => setSelectedPrice("")}
+            onClick={() => setSelectedPrice(null)}
             className="mt-2 text-blue-500 text-xs hover:underline"
           >
             Reset selection

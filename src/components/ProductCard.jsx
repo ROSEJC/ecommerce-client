@@ -1,5 +1,4 @@
 import { ShoppingCart, Star } from "lucide-react";
-
 export default function ProductCard({
   image = "/airpod.png",
   name = "Apple AirPods 3rd generation...",
@@ -10,6 +9,9 @@ export default function ProductCard({
   reviewCount = 5,
   rating = 5,
 }) {
+  const handleAddToCart = () => {
+    //fetch to back end
+  };
   return (
     <div className="border rounded-lg shadow-sm overflow-hidden w-full max-w-[18rem]">
       {/* Hình ảnh sản phẩm */}
@@ -52,7 +54,10 @@ export default function ProductCard({
         </div>
 
         {/* Nút Add to cart */}
-        <button className="flex items-center justify-center gap-2 bg-blue-400 hover:bg-blue-800 text-white px-4 py-2 rounded-3xl w-full max-w-[10rem] mt-2">
+        <button
+          className="flex items-center justify-center gap-2 bg-blue-400 hover:bg-blue-800 text-white px-4 py-2 rounded-3xl w-full max-w-[10rem] mt-2"
+          onClick={handleAddToCart}
+        >
           <ShoppingCart className="w-4 h-4" />
           Add to Cart
         </button>
