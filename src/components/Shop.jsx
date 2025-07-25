@@ -5,11 +5,42 @@ import Header from "./Header";
 import Footer from "./Footer";
 import { useState } from "react";
 import { useEffect } from "react";
+import axios from "axios";
 const Shop = () => {
-  const [choices, setChoices] = useState("");
-
+  const [choices, setChoices] = useState({
+    shape: null,
+    brand: null,
+    price: null,
+  });
+  const [datas, setDatas] = useState([]);
   useEffect(() => {
-    if (!choices) return; // tránh gọi khi chưa có giá trị
+    const getData = async (shape, brand, minPrice, maxPrice) => {
+      const response = await axios.get("http://localhost:3000/product", {
+        params: {
+          shape,
+          minPrice,
+          maxPrice,
+          brand,
+        },
+      });
+      return response.data;
+    };
+
+    const fetchData = async () => {
+      try {
+        const data = await getData(
+          choices.shape,
+          choices.brand,
+          choices.price?.minPrice,
+          choices.price?.maxPrice
+        );
+        setDatas(data);
+      } catch (err) {
+        console.error("Lỗi khi fetch product:", err);
+      }
+    };
+
+    fetchData();
   }, [choices]); // chạy lại mỗi khi selectedCategory thay đổi
 
   return (
@@ -22,9 +53,14 @@ const Shop = () => {
         </div>
 
         <div className="max-h-screen h-180 overflow-y-auto border-t border-black w-auto grid grid-cols-2 lg:grid-cols-3 gap-x-4 px-4 gap-y-4 py-4">
-          {[...Array(30)].map((_, index) => (
+          {datas.map((data, index) => (
             <div key={index} className="h-full">
-              <ProductCard />
+              <ProductCard
+                category={data.shape}
+                name={data.name}
+                price={data.price}
+                oldPrice={data.price + 1000}
+              />
             </div>
           ))}
         </div>

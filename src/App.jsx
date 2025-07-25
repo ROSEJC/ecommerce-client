@@ -21,7 +21,7 @@ function App() {
             <Route path="/home" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/login" element={<LoginAndSignup />} />
-            <Route path="/detail" element={<Detail />} />
+            <Route path="/detail/:id" element={<Detail />} />
             {/* thêm các route khác tại đây nếu cần */}
           </Routes>
         </main>

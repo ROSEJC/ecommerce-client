@@ -12,7 +12,7 @@ const RouteButton = ({ setChoice }) => {
 
       <div className="flex gap-2 text-lg">
         <button
-          onClick={() => handleClick(1)}
+          onClick={() => handleClick("Stem")}
           className={`px-4 py-2 rounded-3xl 
         ${
           currentChoice === 1
@@ -20,11 +20,11 @@ const RouteButton = ({ setChoice }) => {
             : "bg-gray-200 text-black"
         } focus:outline-none focus:ring-0`}
         >
-          Gadget
+          Stem
         </button>
 
         <button
-          onClick={() => handleClick(2)}
+          onClick={() => handleClick("Bud")}
           className={`px-4 py-2 rounded-3xl 
         ${
           currentChoice === 2
@@ -32,11 +32,11 @@ const RouteButton = ({ setChoice }) => {
             : "bg-gray-200 text-black"
         } focus:outline-none focus:ring-0`}
         >
-          Appliances
+          Bud
         </button>
 
         <button
-          onClick={() => handleClick(3)}
+          onClick={() => handleClick("Hook")}
           className={`px-4 py-2 rounded-3xl 
         ${
           currentChoice === 3
@@ -44,11 +44,11 @@ const RouteButton = ({ setChoice }) => {
             : "bg-gray-200 text-black"
         } focus:outline-none focus:ring-0`}
         >
-          Refrigertors
+          Hook
         </button>
 
         <button
-          onClick={() => handleClick(4)}
+          onClick={() => handleClick("")}
           className={`px-4 py-2 rounded-3xl 
         ${
           currentChoice === 4
@@ -62,7 +62,7 @@ const RouteButton = ({ setChoice }) => {
 
       {/* 1 button bên phải */}
       <button
-        onClick={() => handleClick(5)}
+        onClick={() => handleClick("")}
         className={`px-4 py-2 rounded-3xl text-lg
         ${
           currentChoice === 5

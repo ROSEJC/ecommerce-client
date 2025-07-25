@@ -5,31 +5,42 @@ const SidebarFilter = ({ setChoices }) => {
   const [selectedBrand, setSelectedBrand] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
 
-  const productCategories = [
-    "Kitchen Appliances",
-    "Television",
-    "Refrigerators",
-    "Washing Machine",
-    "Tablets",
-    "gadget accessories",
-    "Appliances",
-    "Air Conditioners",
-    "Airbuds",
-    "Cameras",
-    "Smartphones",
-    "Mobiles",
-    "Smart Watches",
-  ];
+  const productCategories = ["Bud", "Hook", "Stem"];
 
   const brands = [
-    "Hi-Tech Limited",
-    "hp Limited",
-    "The Apple Limited",
-    "A4 Tech",
-    "The Hitachi Limited",
-    "Huawei Company",
-    "IKEA Limited",
-    "Sony Limited",
+    "Microsoft",
+    "Bang & Olufsen",
+    "LG",
+    "Avantree",
+    "Sennheiser",
+    "Cambridge Audio",
+    "KZ",
+    "HyperX",
+    "TOZO",
+    "EarFun",
+    "Bowers & Wilkins",
+    "Yamaha",
+    "Asus",
+    "Marshall",
+    "Apple/Beats",
+    "Sony",
+    "Jabra",
+    "1More",
+    "Google",
+    "QCY",
+    "Vivo",
+    "JBL",
+    "Huawei",
+    "Oppo",
+    "TCL",
+    "Amazon/Echo",
+    "OnePlus",
+    "Belkin",
+    "Realme",
+    "Fairphone",
+    "HIFIMAN",
+    "Nura",
+    "Xiaomi/Redmi",
   ];
 
   const prices = [
@@ -42,7 +53,7 @@ const SidebarFilter = ({ setChoices }) => {
 
   useEffect(() => {
     setChoices({
-      category: selectedCategory,
+      shape: selectedCategory,
       brand: selectedBrand,
       price: selectedPrice,
     });

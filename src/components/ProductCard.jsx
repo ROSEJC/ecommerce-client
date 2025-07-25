@@ -1,5 +1,8 @@
 import { ShoppingCart, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
 export default function ProductCard({
+  id = 1,
   image = "/airpod.png",
   name = "Apple AirPods 3rd generation...",
   category = "GADGET ACCESSORIES, AIRBUDS",
@@ -9,17 +12,24 @@ export default function ProductCard({
   reviewCount = 5,
   rating = 5,
 }) {
-  const handleAddToCart = () => {
-    //fetch to back end
+  const navigate = useNavigate(); // ✅ gọi hook đúng chỗ
+  const handleCardClick = () => {
+    navigate(`/detail/${id}`);
   };
+  const handleAddToCart = () => {};
   return (
     <div className="border rounded-lg shadow-sm overflow-hidden w-full max-w-[18rem]">
       {/* Hình ảnh sản phẩm */}
-      <img
-        src={image}
-        alt="Product"
-        className="w-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
-      />
+      <button
+        className="focus:outline-none focus:ring-0 active:outline-none hover:outline-none"
+        onClick={handleCardClick}
+      >
+        <img
+          src={image}
+          alt="Product"
+          className="w-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+        />
+      </button>
 
       {/* Nội dung */}
       <div className="p-4 space-y-1">

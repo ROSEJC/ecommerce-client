@@ -13,8 +13,14 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 import ProductTabs from "./ProductTabs";
+import Header from "./Header";
+import Footer from "./Footer";
+import ProductCard from "./ProductCard";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 const defaultProduct = {
-  title: "Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18–55mm",
+  name: "Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18–55mm",
   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
   price: 750,
   oldPrice: 810,
@@ -35,37 +41,37 @@ const defaultProduct = {
 };
 
 const Detail = () => {
-  const [product, setProduct] = useState(null);
+  const { id } = useParams();
+  const [productData, setProductData] = useState([]);
+
   const [isExpanded, setIsExpanded] = useState(false);
 
   useEffect(() => {
-    // Giả sử bạn fetch API ở đây, dùng dữ liệu thật từ server
-    const fetchData = async () => {
+    const getData = async () => {
       try {
-        const res = await fetch("/api/product/123"); // ví dụ
-        const data = await res.json();
-        setProduct(data); // nếu thành công thì set bằng dữ liệu thật
-      } catch (err) {
-        console.error("Error fetching product:", err);
-        setProduct(defaultProduct); // nếu lỗi thì dùng default
+        const response = await axios.get(`http://localhost:3000/product/${id}`);
+        setProductData(response.data); //
+      } catch (error) {
+        console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
       }
     };
-    fetchData();
-  }, []);
 
-  if (!product) return <div>Loading...</div>;
+    getData();
+  }, [id]);
+
   return (
     <div>
+      <Header />
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-4">
         {/* Left - Image Gallery */}
         <div className="space-y-4">
           <img
-            src={`${product.images[0]}`}
+            src={`${defaultProduct.images[0]}`}
             alt="Main"
             className="w-full rounded-lg border"
           />
           <div className="flex flex-wrap gap-2">
-            {product.images.map((img, idx) => (
+            {defaultProduct.images.map((img, idx) => (
               <img
                 key={idx}
                 src={`${img}`}
@@ -79,12 +85,9 @@ const Detail = () => {
         {/* Right - Details */}
         <div className="space-y-4">
           <h1 className="text-2xl font-bold">
-            Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18–55mm
+            {productData ? productData.name : defaultProduct.name}
           </h1>
-          <p className="text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex unde
-            illum expedita dolores aut nostrum, quidem placeat laborum nemo.
-          </p>
+          <p className="text-gray-500">{defaultProduct.description}</p>
 
           {/* Rating */}
           <div className="flex items-center text-green-600 font-semibold text-sm">
@@ -97,8 +100,12 @@ const Detail = () => {
 
           {/* Price */}
           <div className="flex items-center space-x-4">
-            <span className="text-2xl font-bold text-gray-800">$750.00</span>
-            <span className="line-through text-gray-400">$810.00</span>
+            <span className="text-2xl font-bold text-gray-800">
+              {productData ? productData.price : defaultProduct.price}
+            </span>
+            <span className="line-through text-gray-400">
+              {(productData ? productData.price : defaultProduct.price) + 1000}
+            </span>
           </div>
 
           {/* Stock */}
@@ -119,10 +126,9 @@ const Detail = () => {
             className="flex items-center justify-between text-sm text-gray-600 font-medium cursor-pointer"
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            <span>
-              Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18–55mm:
-              Characteristics
-            </span>
+            <span>{`${
+              productData ? productData.name : defaultProduct.name
+            }: Characteristics`}</span>
             {isExpanded ? (
               <ChevronUp className="w-4 h-4 ml-2" />
             ) : (
@@ -138,11 +144,19 @@ const Detail = () => {
           >
             <div className="text-sm text-gray-700 leading-relaxed px-1 pb-2">
               <ul className="list-disc ml-5 space-y-1">
-                <li>Sensor: APS-C CMOS, 24.1 Megapixels</li>
-                <li>ISO Range: 100–25600</li>
-                <li>Video: Full HD (1080p)</li>
-                <li>Connectivity: Wi-Fi, Bluetooth</li>
-                <li>Weight: Approx. 449g</li>
+                <li>{`Shape: ${productData ? productData.shape : "None"}`}</li>
+
+                <li>{`Ear tip: ${
+                  productData ? productData.eartip : "None"
+                }`}</li>
+
+                <li>{`Minimum Latency: ${
+                  productData ? productData.minLatencyMs : "None"
+                }`}</li>
+
+                <li>{`Brands: ${
+                  productData ? productData.manufacturer : "None"
+                }`}</li>
               </ul>
             </div>
           </div>
@@ -182,8 +196,25 @@ const Detail = () => {
         </div>
       </div>
       <div className="flex justify-start">
-        <ProductTabs />
+        <ProductTabs
+          description={
+            productData ? productData.description : defaultProduct.description
+          }
+          additionalInfo={
+            productData
+              ? `
+            - Controls: ${productData.controls}
+            - Eartip: ${productData.eartip}
+            - Earbuds Battery Level: ${productData.batteryBuds}
+            - Charging Case Battery: ${productData.batteryCase}	
+            - Charge Port: ${productData.chargePort}
+            - Release Year: ${productData.releaseYear}
+            `
+              : ``
+          }
+        />
       </div>
+      <Footer />
     </div>
   );
 };
