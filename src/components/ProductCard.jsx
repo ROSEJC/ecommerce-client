@@ -12,7 +12,7 @@ export default function ProductCard({
   reviewCount = 5,
   rating = 5,
 }) {
-  const navigate = useNavigate(); // ✅ gọi hook đúng chỗ
+  const navigate = useNavigate();
   const handleCardClick = () => {
     navigate(`/detail/${id}`);
   };
@@ -37,9 +37,7 @@ export default function ProductCard({
         <p className="text-xs text-gray-400 uppercase">{category}</p>
 
         {/* Tên sản phẩm */}
-        <h3 className="text-base font-semibold text-gray-900 truncate">
-          {name}
-        </h3>
+        <h3 className="text-sm font-semibold text-gray-900 truncate">{name}</h3>
 
         {/* Đánh giá */}
         <div className="flex items-center text-sm text-gray-400">

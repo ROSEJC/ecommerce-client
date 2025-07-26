@@ -10,15 +10,15 @@ const Header = () => {
       </div>
 
       {/* Center: Menu */}
-      <nav className="flex text-gray-700 font-medium hidden md:block">
-        <button className="text-lg bg-transparent border-none text-black hover:text-blue-500 hover:underline hover:decoration-2 transition">
+      <nav className="hidden md:flex text-zinc-600 ">
+        <button className="font-semibold text-sm bg-transparent border-none hover:text-green-600  hover:underline hover:decoration-2 transition">
           Home
         </button>
-        <button className="text-lg bg-transparent border-none text-black hover:text-blue-500 hover:underline hover:decoration-2 transition">
+        <button className="font-semibold text-sm bg-transparent border-none hover:text-green-600  hover:underline hover:decoration-2 transition">
           Shop
         </button>
-        <button className="text-lg bg-transparent border-none text-black hover:text-blue-500 hover:underline hover:decoration-2 transition">
-          HotDeal
+        <button className="font-semibold text-sm bg-transparent border-none hover:text-green-600 hover:underline hover:decoration-2 transition">
+          Hot deal
         </button>
       </nav>
 

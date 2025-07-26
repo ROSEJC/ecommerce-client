@@ -1,9 +1,8 @@
 import { Divide } from "lucide-react";
 import React from "react";
 import SignupCard from "./SignupCard";
-import LoginCard from "./LoginCard";
 
-const LoginAndSignup = () => {
+const SignupPage = () => {
   return (
     <div className="">
       <div
@@ -33,4 +32,4 @@ const LoginAndSignup = () => {
     </div>
   );
 };
-export default LoginAndSignup;
+export default SignupPage;
