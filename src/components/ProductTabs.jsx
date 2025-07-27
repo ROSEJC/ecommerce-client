@@ -25,7 +25,7 @@ const ProductTabs = ({ description, additionalInfo, reviews }) => {
   return (
     <div className="w-full max-w-3xl my-4">
       {/* Tabs */}
-      <div className="flex space-x-4 bg-gray-100 rounded-lg p-1 w-full">
+      <div className="flex space-x-4 bg-gray-300 rounded-lg p-1 w-full">
         {["description", "additionalInfo", "reviews"].map((tab) => (
           <button
             key={tab}
@@ -33,8 +33,8 @@ const ProductTabs = ({ description, additionalInfo, reviews }) => {
             className={`py-2 px-4 rounded-md font-medium text-sm w-full
               ${
                 activeTab === tab
-                  ? "bg-white text-green-800 border border-green-600"
-                  : "text-gray-600 hover:text-green-700"
+                  ? "bg-white text-black font-semibold border-none"
+                  : "text-black hover:text-green-700 bg-gray-300"
               }`}
           >
             {tab === "description"

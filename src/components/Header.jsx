@@ -1,16 +1,18 @@
 import React from "react";
-import { UserPlus, LogIn, Search } from "lucide-react";
+import { useState } from "react";
 
-const Header = () => {
+import { Search, ShoppingBag, Heart, List } from "lucide-react";
+
+const Header = ({ onToggleSearch }) => {
   return (
     <header className="sticky top-0 z-50 flex items-center justify-between py-4 px-6 bg-white/30 backdrop-blur-md border-b border-white/20">
       {/* Left: Logos */}
-      <div className="flex items-center space-x-4">
+      <div className="basis-1/3 flex items-center space-x-4">
         <span className="font-bold text-xl text-blue-600">Logo1</span>
       </div>
 
       {/* Center: Menu */}
-      <nav className="hidden md:flex text-zinc-600 ">
+      <nav className="basis-1/3 hidden md:flex text-zinc-600 justify-center">
         <button className="font-semibold text-sm bg-transparent border-none hover:text-green-600  hover:underline hover:decoration-2 transition">
           Home
         </button>
@@ -23,21 +25,28 @@ const Header = () => {
       </nav>
 
       {/* Right: Auth Buttons */}
-      <div className="flex items-center">
-        <button className="bg-transparent flex items-center hover:text-blue-600 transition">
-          <Search className="w-6 h-6" />
+      <div className="basis-1/3 flex justify-end ">
+        <button
+          className="bg-transparent flex items-center hover:text-blue-600 transition  px-2"
+          onClick={onToggleSearch}
+        >
+          <Search className="w-5 h-5" />
         </button>
 
-        <button className="bg-transparent flex items-center hover:text-blue-600 transition">
-          <UserPlus className="w-6 h-6" />
+        <button className="bg-transparent flex items-center hover:text-blue-600 transition  px-2">
+          <ShoppingBag className="w-5 h-5" />
         </button>
 
-        <button className="bg-transparent flex items-center hover:text-blue-600 transition">
-          <LogIn className="w-6 h-6" />
+        <button className="bg-transparent flex items-center hover:text-blue-600 transition  px-2">
+          <Heart className="w-5 h-5" />
         </button>
 
-        <button className="bg-transparent flex items-center hover:text-blue-600 transition">
-          <div className="text-lg">Login</div>
+        <button className="bg-transparent flex items-center hover:text-blue-600 transition  px-2">
+          <List className="w-5 h-5" />
+        </button>
+
+        <button className="bg-transparent flex items-center hover:text-blue-600 transition  px-2">
+          <div className="text-sm">Login</div>
         </button>
       </div>
     </header>

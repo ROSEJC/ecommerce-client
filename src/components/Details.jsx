@@ -18,7 +18,7 @@ import Footer from "./Footer";
 import ProductCard from "./ProductCard";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
+import { ShoppingBag } from "lucide-react";
 const defaultProduct = {
   name: "Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18–55mm",
   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
@@ -61,7 +61,6 @@ const Detail = () => {
 
   return (
     <div>
-      <Header />
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-4">
         {/* Left - Image Gallery */}
         <div className="space-y-4">
@@ -83,52 +82,67 @@ const Detail = () => {
         </div>
 
         {/* Right - Details */}
-        <div className="space-y-4">
-          <h1 className="text-2xl font-bold">
-            {productData ? productData.name : defaultProduct.name}
-          </h1>
-          <p className="text-gray-500">{defaultProduct.description}</p>
+        <div className="">
+          <div className="border-b py-4">
+            <h1 className="text-2xl font-semibold">
+              {productData ? productData.name : defaultProduct.name}
+            </h1>
+            <p className="text-gray-500">{defaultProduct.description}</p>
 
-          {/* Rating */}
-          <div className="flex items-center text-green-600 font-semibold text-sm">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <Star key={i} size={16} fill="green" strokeWidth={0} />
-            ))}
-            <Star size={16} stroke="green" />
-            <span className="ml-2">(120)</span>
+            {/* Rating */}
+            <div className="flex items-center text-green-600 font-semibold text-sm">
+              {Array.from({ length: 4 }).map((_, i) => (
+                <Star key={i} size={16} fill="green" strokeWidth={0} />
+              ))}
+              <Star size={16} stroke="green" />
+              <span className="ml-2">(120)</span>
+            </div>
           </div>
 
           {/* Price */}
-          <div className="flex items-center space-x-4">
-            <span className="text-2xl font-bold text-gray-800">
-              {productData ? productData.price : defaultProduct.price}
-            </span>
-            <span className="line-through text-gray-400">
-              {(productData ? productData.price : defaultProduct.price) + 1000}
-            </span>
+          <div className="py-4 border-b space-y-1">
+            <div className="flex items-center space-x-4">
+              <span className="text-2xl font-bold text-gray-800">
+                {(productData ? productData.price : defaultProduct.price) *
+                  1000}{" "}
+                VND
+              </span>
+              <span className="line-through text-gray-400">
+                {(productData ? productData.price : defaultProduct.price) *
+                  1000 +
+                  1000}{" "}
+                VND
+              </span>
+            </div>
+
+            {/* Stock */}
+            <div className="text-green-600 p-2 bg-green-200 rounded-lg text-xs inline-block font-semibold ">
+              In Stock
+            </div>
           </div>
-
-          {/* Stock */}
-          <div className="text-green-700 font-medium">In Stock</div>
-
           {/* Add to cart */}
-          <div className="flex space-x-2">
-            <button className="px-6 py-2 bg-green-700 hover:bg-green-800 text-white rounded-md shadow">
+          <div className="flex space-x-2 my-6">
+            <button className="flex flex-1 items-center justify-center gap-2 px-6 py-2 bg-green-800 hover:bg-green-900 text-white rounded-md shadow text-sm">
+              <ShoppingBag className="w-5 h-5" />
               Add to Cart
             </button>
-            <button className="p-2 border rounded-md">
+
+            <button className="p-2 border rounded-md border-pink-200 ">
               <Heart className="text-gray-600 w-5 h-5" />
             </button>
           </div>
 
           {/* Expandable Info */}
           <div
-            className="flex items-center justify-between text-sm text-gray-600 font-medium cursor-pointer"
+            className="flex items-center justify-between text-sm text-black cursor-pointer font-bold"
             onClick={() => setIsExpanded(!isExpanded)}
           >
-            <span>{`${
-              productData ? productData.name : defaultProduct.name
-            }: Characteristics`}</span>
+            <span>
+              {`${
+                productData ? productData.name : defaultProduct.name
+              }: Characteristics`}
+            </span>
+
             {isExpanded ? (
               <ChevronUp className="w-4 h-4 ml-2" />
             ) : (
@@ -144,19 +158,32 @@ const Detail = () => {
           >
             <div className="text-sm text-gray-700 leading-relaxed px-1 pb-2">
               <ul className="list-disc ml-5 space-y-1">
-                <li>{`Shape: ${productData ? productData.shape : "None"}`}</li>
+                <li>
+                  Shape:{" "}
+                  <span className="font-bold">
+                    {productData ? productData.shape : "None"}
+                  </span>
+                </li>
 
-                <li>{`Ear tip: ${
-                  productData ? productData.eartip : "None"
-                }`}</li>
+                <li>
+                  Ear tip:{" "}
+                  <span className="font-bold">
+                    {productData ? productData.eartip : "None"}
+                  </span>
+                </li>
 
-                <li>{`Minimum Latency: ${
-                  productData ? productData.minLatencyMs : "None"
-                }`}</li>
-
-                <li>{`Brands: ${
-                  productData ? productData.manufacturer : "None"
-                }`}</li>
+                <li>
+                  Minimum Latency:{" "}
+                  <span className="font-bold">
+                    {productData ? productData.minLatencyMs : "None"}
+                  </span>
+                </li>
+                <li>
+                  Brands:{" "}
+                  <span className="font-bold">
+                    {productData ? productData.manufacturer : "None"}
+                  </span>
+                </li>
               </ul>
             </div>
           </div>
@@ -214,7 +241,6 @@ const Detail = () => {
           }
         />
       </div>
-      <Footer />
     </div>
   );
 };

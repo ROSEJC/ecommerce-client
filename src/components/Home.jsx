@@ -55,7 +55,6 @@ const Home = () => {
 
   return (
     <div className="flex-grow">
-      <Header />
       <Banner />
       <RouteButton setChoice={setChoices} />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
@@ -72,7 +71,6 @@ const Home = () => {
       </div>
       <PopularCategoryCard />
       <ShopByBrands />
-      <Footer />
     </div>
   );
 };

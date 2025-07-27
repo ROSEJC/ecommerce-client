@@ -45,7 +45,6 @@ const Shop = () => {
 
   return (
     <div>
-      <Header />
       <p className="text-2xl my-4 font-bold">GET THE PRODUCTS AS YOUR NEEDS</p>
       <div className="flex flex-col md:flex-row">
         <div className="border-t border-r border-black max-w-xs w-full">
@@ -65,7 +64,6 @@ const Shop = () => {
           ))}
         </div>
       </div>
-      <Footer />
     </div>
   );
 };

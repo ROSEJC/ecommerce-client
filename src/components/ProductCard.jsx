@@ -44,7 +44,7 @@ export default function ProductCard({
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className="w-4 h-4 text-green-500 fill-blue-500 mr-1"
+              className="w-4 h-4 text-green-500 fill-yellow-500 mr-1"
             />
           ))}
           <span className="ml-1 text-gray-400">5 Reviews</span>
@@ -63,7 +63,7 @@ export default function ProductCard({
 
         {/* Nút Add to cart */}
         <button
-          className="flex items-center justify-center gap-2 bg-blue-400 hover:bg-blue-800 text-white px-4 py-2 rounded-3xl w-full max-w-[10rem] mt-2"
+          className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-800 text-white px-4 py-2 rounded-3xl w-full max-w-[10rem] mt-2"
           onClick={handleAddToCart}
         >
           <ShoppingCart className="w-4 h-4" />
