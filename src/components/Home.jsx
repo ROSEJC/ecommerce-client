@@ -57,7 +57,7 @@ const Home = () => {
     <div className="flex-grow">
       <Banner />
       <RouteButton setChoice={setChoices} />
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4 m-0">
         {products.map((product, index) => (
           <ProductCard
             id={product.id}

@@ -55,6 +55,7 @@ const Shop = () => {
           {datas.map((data, index) => (
             <div key={index} className="h-full">
               <ProductCard
+                id={data.id}
                 category={data.shape}
                 name={data.name}
                 price={data.price}

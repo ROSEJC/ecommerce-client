@@ -1,7 +1,54 @@
 import React from "react";
 import { ShoppingBag } from "lucide-react";
 import ProductCard from "./ProductCard";
+import { useNavigate } from "react-router-dom";
+import { jwtDecode } from "jwt-decode";
+import axios from "axios";
 const SearchItemCard = ({ product, action }) => {
+  const navigate = useNavigate();
+
+  const handleAddToCart = () => {
+    const token = localStorage.getItem("token");
+    const now = Date.now() / 1000;
+
+    if (token) {
+      const decoded = jwtDecode(token);
+      if (decoded.exp > now) {
+        const addToCart = async () => {
+          try {
+            await axios.post(
+              "http://localhost:3000/cart/add",
+              {
+                userId: decoded.userId,
+                productId: product.id,
+                quantity: 1,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            console.log("Đã thêm vào giỏ hàng");
+          } catch (err) {
+            console.error(
+              "Lỗi khi thêm vào giỏ hàng:",
+              err.response?.data || err.message
+            );
+          }
+        };
+
+        addToCart();
+      } else {
+        localStorage.removeItem("token");
+        console.error("Phiên đăng nhập đã hết hạn");
+        navigate("/login"); // hoặc "/cart" nếu bạn muốn vậy
+      }
+    } else {
+      console.error("Bạn cần đăng nhập để sử dụng chức năng này");
+      navigate("/login");
+    }
+  };
   return (
     <div className="flex border border-orange-200 max-w-full w-full">
       <button

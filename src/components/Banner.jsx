@@ -21,7 +21,7 @@ const Banner = () => {
       </div>
       <img
         src="/blue-jacket-boy.png"
-        className="h-60 w-auto self-end hidden lg:block"
+        className="h-60 w-auto self-end hidden xl:block"
       />
     </div>
   );

@@ -1,10 +1,10 @@
-import { AwardIcon } from "lucide-react";
+import { AwardIcon, FastForward } from "lucide-react";
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-const LoginCard = () => {
+import { useEffect } from "react";
+const LoginCard = ({ setTokenValid }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -18,13 +18,16 @@ const LoginCard = () => {
 
       // Save user to localStorage
       localStorage.setItem("user", JSON.stringify(user));
+      console.log("user token", user.token);
       localStorage.setItem("token", user.token);
+      setTokenValid(true);
       navigate("/home");
     } catch (err) {
       console.error("Đăng nhập thất bại");
       alert("Password or Email is wrong");
     }
   };
+
   return (
     <div className="max-w-md w-full p-8 rounded-lg shadow-md space-y-8 bg-none items-center text-gray-800 my-8 text-shadow font-bold">
       {/* Tiêu đề */}

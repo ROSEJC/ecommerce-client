@@ -1,3 +1,5 @@
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import { ShoppingCart, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,7 +18,49 @@ export default function ProductCard({
   const handleCardClick = () => {
     navigate(`/detail/${id}`);
   };
-  const handleAddToCart = () => {};
+  const handleAddToCart = () => {
+    const token = localStorage.getItem("token");
+    const now = Date.now() / 1000;
+
+    if (token) {
+      const decoded = jwtDecode(token);
+      if (decoded.exp > now) {
+        const addToCart = async () => {
+          try {
+            await axios.post(
+              "http://localhost:3000/cart/add",
+              {
+                userId: decoded.userId,
+                productId: id,
+                quantity: 1,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            console.log("Đã thêm vào giỏ hàng");
+          } catch (err) {
+            console.error(
+              "Lỗi khi thêm vào giỏ hàng:",
+              err.response?.data || err.message
+            );
+          }
+        };
+
+        addToCart();
+      } else {
+        localStorage.removeItem("token");
+        console.error("Phiên đăng nhập đã hết hạn");
+        navigate("/login"); // hoặc "/cart" nếu bạn muốn vậy
+      }
+    } else {
+      console.error("Bạn cần đăng nhập để sử dụng chức năng này");
+      navigate("/login");
+    }
+  };
+
   return (
     <div className="border rounded-lg shadow-sm overflow-hidden w-full max-w-[18rem]">
       {/* Hình ảnh sản phẩm */}
@@ -63,7 +107,7 @@ export default function ProductCard({
 
         {/* Nút Add to cart */}
         <button
-          className="flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-800 text-white px-4 py-2 rounded-3xl w-full max-w-[10rem] mt-2"
+          className="flex items-center justify-center gap-2 bg-green-800 hover:bg-green-900 text-white px-4 py-2 rounded-3xl w-full max-w-[10rem] mt-2"
           onClick={handleAddToCart}
         >
           <ShoppingCart className="w-4 h-4" />

@@ -3,7 +3,7 @@ import React from "react";
 import SignupCard from "./SignupCard";
 import LoginCard from "./LoginCard";
 
-const LoginAndSignup = () => {
+const LoginPage = ({ setTokenValid }) => {
   return (
     <div className="">
       <div
@@ -26,11 +26,11 @@ const LoginAndSignup = () => {
 
           {/* Bên phải: SignupCard */}
           <div className="w-1/2 h-full flex items-center justify-center bg-white/70 px-6 py-8">
-            <LoginCard />
+            <LoginCard setTokenValid={setTokenValid} />
           </div>
         </div>
       </div>
     </div>
   );
 };
-export default LoginAndSignup;
+export default LoginPage;

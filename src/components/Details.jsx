@@ -12,11 +12,12 @@ import {
 } from "lucide-react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { jwtDecode } from "jwt-decode";
 import ProductTabs from "./ProductTabs";
 import Header from "./Header";
 import Footer from "./Footer";
 import ProductCard from "./ProductCard";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ShoppingBag } from "lucide-react";
 const defaultProduct = {
@@ -45,7 +46,7 @@ const Detail = () => {
   const [productData, setProductData] = useState([]);
 
   const [isExpanded, setIsExpanded] = useState(false);
-
+  const navigate = useNavigate();
   useEffect(() => {
     const getData = async () => {
       try {
@@ -58,7 +59,45 @@ const Detail = () => {
 
     getData();
   }, [id]);
+  const handleAddToCart = () => {
+    const token = localStorage.getItem("token");
+    const now = Date.now() / 1000;
 
+    if (token) {
+      const decoded = jwtDecode(token);
+      if (decoded.exp > now) {
+        const addToCart = async () => {
+          try {
+            await axios.post(
+              "http://localhost:3000/cart/add",
+              {
+                userId: decoded.userId,
+                productId: id,
+                quantity: 1,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            );
+            console.log("Đã thêm vào giỏ hàng");
+          } catch (err) {
+            console.error("Lỗi khi thêm vào giỏ hàng:", err.message);
+          }
+        };
+
+        addToCart();
+      } else {
+        localStorage.removeItem("token");
+        console.error("Phiên đăng nhập đã hết hạn");
+        navigate("/login"); // hoặc "/cart" nếu bạn muốn vậy
+      }
+    } else {
+      console.error("Bạn cần đăng nhập để sử dụng chức năng này");
+      navigate("/login");
+    }
+  };
   return (
     <div>
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-4">
@@ -122,7 +161,10 @@ const Detail = () => {
           </div>
           {/* Add to cart */}
           <div className="flex space-x-2 my-6">
-            <button className="flex flex-1 items-center justify-center gap-2 px-6 py-2 bg-green-800 hover:bg-green-900 text-white rounded-md shadow text-sm">
+            <button
+              className="flex flex-1 items-center justify-center gap-2 px-6 py-2 bg-green-800 hover:bg-green-900 text-white rounded-md shadow text-sm"
+              onClick={handleAddToCart}
+            >
               <ShoppingBag className="w-5 h-5" />
               Add to Cart
             </button>
