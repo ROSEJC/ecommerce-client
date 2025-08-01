@@ -12,6 +12,34 @@ const Cart = () => {
   const [cartProduct, setCartProduct] = useState([]);
   const [productTotal, setProductTotal] = useState(0);
 
+  const isTokenValid = (token) => {
+    const now = Date.now() / 1000;
+    const decoded = jwtDecode(token);
+    if (decoded.exp < now) {
+      return false;
+    }
+
+    return true;
+  };
+
+  const resetCartHandle = async () => {
+    const token = localStorage.getItem("token");
+    if (isTokenValid(token)) {
+      const decoded = jwtDecode(token);
+      const userId = decoded.userId;
+      try {
+        await axios.delete(`http://localhost:3000/cart/reset/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setCartProduct([]);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -19,7 +47,7 @@ const Cart = () => {
       try {
         const decoded = jwtDecode(token);
         const now = Date.now() / 1000;
-
+        const userId = decoded.userId;
         if (decoded.exp < now) {
           // Token hết hạn
           setLogin(false);
@@ -27,15 +55,22 @@ const Cart = () => {
         } else {
           setLogin(true);
           const getData = async () => {
-            const response = await axios.get(
-              `http://localhost:3000/cart/${decoded.userId}`,
-              {
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            );
+            try {
+              const response = await axios.get(
+                `http://localhost:3000/cart/${userId}`,
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                }
+              );
+              setCartProduct(response.data.items);
+            } catch (err) {
+              console.error("Error fetching cart:", err);
+              // Có thể xử lý thêm: set thông báo lỗi, logout,...
+            }
           };
+          getData();
         }
       } catch (error) {
         console.error("Invalid token");
@@ -73,12 +108,23 @@ const Cart = () => {
               {/* Danh sách sản phẩm */}
               <div className="border border-gray-200 rounded-lg">
                 <div>
-                  <ProductCart />
-                  <ProductCart />
+                  {cartProduct.map((item, index) => (
+                    <ProductCart
+                      key={index}
+                      id={item.product?.id}
+                      name={item.product?.name}
+                      productQuantity={item.quantity}
+                      shape={item.product?.shape}
+                      price={item.product?.price}
+                    />
+                  ))}
                 </div>
 
                 {/* Nút Reset Cart */}
-                <button className="bg-orange-500 text-white text-sm font-semibold rounded-lg mx-2 my-6 hover:bg-orange-700">
+                <button
+                  className="bg-orange-500 text-white text-sm font-semibold rounded-lg mx-2 my-6 hover:bg-orange-700"
+                  onClick={resetCartHandle}
+                >
                   Reset Cart
                 </button>
               </div>
@@ -87,7 +133,7 @@ const Cart = () => {
             {/* Right: Order Summary & Address */}
             <div className="w-full lg:w-[400px] space-y-4 pt-16">
               {/* Order Summary */}
-              <OrderSummery />
+              <OrderSummery items={cartProduct} />
               {/* Delivery Address */}
               <DeliveryCard />
             </div>

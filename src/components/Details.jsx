@@ -20,6 +20,8 @@ import ProductCard from "./ProductCard";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ShoppingBag } from "lucide-react";
+import CompareCard from "./Detail/CompareCard";
+
 const defaultProduct = {
   name: "Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18–55mm",
   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
@@ -43,6 +45,7 @@ const defaultProduct = {
 
 const Detail = () => {
   const { id } = useParams();
+  const [showCompare, setShowCompare] = useState(false);
   const [productData, setProductData] = useState([]);
 
   const [isExpanded, setIsExpanded] = useState(false);
@@ -59,6 +62,10 @@ const Detail = () => {
 
     getData();
   }, [id]);
+  const handleCompareClick = () => {
+    setShowCompare(true);
+  };
+
   const handleAddToCart = () => {
     const token = localStorage.getItem("token");
     const now = Date.now() / 1000;
@@ -232,9 +239,12 @@ const Detail = () => {
 
           {/* Bottom Icons */}
           <div className="flex space-x-6 text-gray-600 text-sm mt-4">
-            <div className="flex items-center space-x-1">
-              <MessageCircle size={16} /> <span>Ask a question</span>
-            </div>
+            <button
+              className="border border-orange-500 text-black  text-sm font-semibold rounded-lg mx-2 my-6 hover:bg-orange-700 hover:text-white"
+              onClick={handleCompareClick}
+            >
+              Compare
+            </button>
             <div className="flex items-center space-x-1">
               <Truck size={16} /> <span>Delivery & Return</span>
             </div>
@@ -283,6 +293,14 @@ const Detail = () => {
           }
         />
       </div>
+
+      {showCompare && (
+        <CompareCard
+          onClose={() => {
+            setShowCompare(false);
+          }}
+        />
+      )}
     </div>
   );
 };
