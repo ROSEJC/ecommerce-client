@@ -50,7 +50,7 @@ const SearchItemCard = ({ product, action }) => {
     }
   };
   return (
-    <div className="flex border border-orange-200 max-w-full w-full">
+    <div className="flex border border-orange-200 dark:border-zinc-600 max-w-full w-full transition-transform ease-in-out duration-300 hover:scale-105">
       <button
         className="overflow-hidden border border-gray-300 rounded-lg m-2"
         onClick={action}

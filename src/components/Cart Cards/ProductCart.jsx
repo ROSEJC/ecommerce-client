@@ -64,27 +64,35 @@ const ProductCart = ({
   return (
     <div className="flex max-w-full w-full">
       <button
-        className="overflow-hidden border border-gray-300 rounded-lg m-2"
         onClick={handleImgClick}
+        className="overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-white rounded-lg m-2 transition-colors"
       >
         <img
           src="/airpod.png"
-          className="h-24 w-24 object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+          alt="Product"
+          className="h-24 w-24 object-cover transition-transform duration-300 ease-in-out hover:scale-105 rounded-lg"
         />
       </button>
-      <div className="mx-4">
+
+      <div className="mx-4 text-zinc-800 dark:text-zinc-200">
         <p className="text-lg font-semibold mt-4">{name}</p>
-        <div className="flex gap-1 text-sm">
-          <span>Shape: </span> <div className="font-semibold">{shape}</div>
+
+        <div className="flex gap-1 text-sm mt-1">
+          <span className="text-zinc-600 dark:text-zinc-400">Shape:</span>
+          <span className="font-semibold">{shape}</span>
         </div>
-        <div className="flex gap-1 text-sm">
-          <span>Status: </span> <div className="font-semibold">New</div>
+
+        <div className="flex gap-1 text-sm mt-1">
+          <span className="text-zinc-600 dark:text-zinc-400">Status:</span>
+          <span className="font-semibold text-green-600 dark:text-green-400">
+            New
+          </span>
         </div>
       </div>
 
       <div className="mx-4 ml-auto space-x-2 flex flex-col justify-between my-2">
         <div className="flex justify-center">
-          <p className="text-lg font-semibold mt-4 text-black">
+          <p className="text-lg font-semibold mt-4 text-zinc-800 dark:text-zinc-200">
             {price * 1000 * quantity} VND
           </p>
         </div>
@@ -92,18 +100,22 @@ const ProductCart = ({
         <div className="flex items-center space-x-4 justify-end">
           <button
             onClick={decrease}
-            className="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center shadow-sm hover:bg-gray-100"
+            className="w-8 h-8 rounded-md border border-gray-300 dark:border-zinc-600 flex items-center justify-center shadow-sm hover:bg-gray-100 dark:hover:bg-zinc-700 dark:bg-gray-700"
           >
-            <span className="text-xl leading-none">−</span>
+            <span className="text-xl leading-none text-gray-800 dark:text-white ">
+              −
+            </span>
           </button>
-          <span className="text-lg font-medium w-4 text-center">
+          <span className="text-lg font-medium w-4 text-center text-gray-800 dark:text-white">
             {quantity}
           </span>
           <button
             onClick={increase}
-            className="w-8 h-8 rounded-md border border-gray-300 flex items-center justify-center shadow-sm hover:bg-gray-100"
+            className="w-8 h-8 rounded-md border border-gray-300 dark:border-zinc-600 flex items-center justify-center shadow-sm hover:bg-gray-100 dark:hover:bg-zinc-700 dark:bg-gray-700"
           >
-            <span className="text-xl leading-none">+</span>
+            <span className="text-xl leading-none text-gray-800 dark:text-white">
+              +
+            </span>
           </button>
         </div>
       </div>

@@ -59,36 +59,38 @@ const SidebarFilter = ({ setChoices }) => {
     });
   }, [selectedCategory, selectedBrand, selectedPrice, setChoices]);
   return (
-    <div className="text-sm font-medium space-y-6 max-w-xs mb-10 mt-5">
+    <div className="text-sm font-medium max-w-xs mb-10 mt-5 p-4 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow space-y-6">
       {/* Product Categories */}
-      <div>
-        <p className="mb-2 font-semibold text-lg">Product Categories</p>
+      <div className="space-y-3 pb-4 border-b border-gray-200 dark:border-gray-700">
+        <p className="font-semibold text-lg text-gray-800 dark:text-gray-100">
+          Product Categories
+        </p>
         <div className="space-y-2">
           {productCategories.map((category) => (
             <label
               key={category}
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer group"
             >
               <input
                 type="radio"
                 name="category"
                 value={category}
                 checked={selectedCategory === category}
-                onChange={() => {
-                  setSelectedCategory(category);
-                  console.log("Bạn vừa chọn:", category);
-                  setSelectedCategory(category);
-                }}
+                onChange={() => setSelectedCategory(category)}
                 className="hidden peer"
               />
-              <div className="w-5 h-5 rounded-sm border border-black flex items-center justify-center peer-checked:bg-blue-500"></div>
-              <div className="hidden peer-checked:block  text-white text-sm leading-none">
-                ✓
+              <div className="w-5 h-5 rounded border border-gray-400 flex items-center justify-center peer-checked:bg-blue-500 peer-checked:border-blue-500 transition">
+                <span className="hidden peer-checked:block text-white text-xs">
+                  ✓
+                </span>
               </div>
-              <span className="peer-checked:font-bold">{category}</span>
+              <span className="group-hover:text-blue-600 peer-checked:font-bold peer-checked:text-blue-600 transition">
+                {category}
+              </span>
             </label>
           ))}
         </div>
+
         {selectedCategory !== "" && (
           <button
             onClick={() => setSelectedCategory("")}
@@ -100,33 +102,36 @@ const SidebarFilter = ({ setChoices }) => {
       </div>
 
       {/* Brands */}
-      <div>
-        <p className="mb-2 font-semibold text-lg">Brands</p>
-        <div className="space-y-2">
+      <div className="space-y-3 pb-4 border-b border-gray-200 dark:border-gray-700">
+        <p className="font-semibold text-lg text-gray-800 dark:text-gray-100">
+          Brands
+        </p>
+        <div className="space-y-2 max-h-60 overflow-y-auto pr-2">
           {brands.map((brand) => (
             <label
               key={brand}
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer group"
             >
               <input
                 type="radio"
                 name="brand"
                 value={brand}
                 checked={selectedBrand === brand}
-                onChange={() => {
-                  setSelectedBrand(brand);
-                  console.log("Bạn vừa chọn:", brand);
-                }}
+                onChange={() => setSelectedBrand(brand)}
                 className="hidden peer"
               />
-              <div className="w-5 h-5 rounded-sm border border-black flex items-center justify-center peer-checked:bg-blue-500"></div>
-              <div className="hidden peer-checked:block  text-white text-sm leading-none">
-                ✓
+              <div className="w-5 h-5 rounded border border-gray-400 flex items-center justify-center peer-checked:bg-blue-500 peer-checked:border-blue-500 transition">
+                <span className="hidden peer-checked:block text-white text-xs">
+                  ✓
+                </span>
               </div>
-              <span className="peer-checked:font-bold">{brand}</span>
+              <span className="group-hover:text-blue-600 peer-checked:font-bold peer-checked:text-blue-600 transition">
+                {brand}
+              </span>
             </label>
           ))}
         </div>
+
         {selectedBrand !== "" && (
           <button
             onClick={() => setSelectedBrand("")}
@@ -137,31 +142,33 @@ const SidebarFilter = ({ setChoices }) => {
         )}
       </div>
 
-      {/* Price */}
-      <div>
-        <p className="mb-2 font-semibold text-lg">Prices</p>
+      {/* Prices */}
+      <div className="space-y-3">
+        <p className="font-semibold text-lg text-gray-800 dark:text-gray-100">
+          Prices
+        </p>
         <div className="space-y-2">
           {prices.map((price) => (
             <label
               key={price.label}
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer group"
             >
               <input
                 type="radio"
                 name="price"
                 value={price.label}
                 checked={selectedPrice?.label === price.label}
-                onChange={() => {
-                  setSelectedPrice(price);
-                  console.log("Bạn vừa chọn:", price);
-                }}
+                onChange={() => setSelectedPrice(price)}
                 className="hidden peer"
               />
-              <div className="w-5 h-5 rounded-sm border border-black flex items-center justify-center peer-checked:bg-blue-500"></div>
-              <div className="hidden peer-checked:block text-white text-sm leading-none">
-                ✓
+              <div className="w-5 h-5 rounded border border-gray-400 flex items-center justify-center peer-checked:bg-blue-500 peer-checked:border-blue-500 transition">
+                <span className="hidden peer-checked:block text-white text-xs">
+                  ✓
+                </span>
               </div>
-              <span className="peer-checked:font-bold">{price.label}</span>
+              <span className="group-hover:text-blue-600 peer-checked:font-bold peer-checked:text-blue-600 transition">
+                {price.label}
+              </span>
             </label>
           ))}
         </div>

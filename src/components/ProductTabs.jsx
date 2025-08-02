@@ -25,17 +25,17 @@ const ProductTabs = ({ description, additionalInfo, reviews }) => {
   return (
     <div className="w-full max-w-3xl my-4">
       {/* Tabs */}
-      <div className="flex space-x-4 bg-gray-300 rounded-lg p-1 w-full">
+      <div className="flex space-x-4 bg-gray-300 dark:bg-zinc-700 rounded-lg p-1 w-full">
         {["description", "additionalInfo", "reviews"].map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
             className={`py-2 px-4 rounded-md font-medium text-sm w-full
-              ${
-                activeTab === tab
-                  ? "bg-white text-black font-semibold border-none"
-                  : "text-black hover:text-green-700 bg-gray-300"
-              }`}
+          ${
+            activeTab === tab
+              ? "bg-white dark:bg-black text-black dark:text-white font-semibold"
+              : "text-black dark:text-white hover:text-green-700 bg-gray-300 dark:bg-zinc-700"
+          }`}
           >
             {tab === "description"
               ? "Description"
@@ -47,7 +47,7 @@ const ProductTabs = ({ description, additionalInfo, reviews }) => {
       </div>
 
       {/* Tab Content */}
-      <div className="mt-6 text-gray-700 text-sm leading-relaxed whitespace-pre-line">
+      <div className="mt-6 text-gray-700 dark:text-gray-300 text-sm leading-relaxed whitespace-pre-line">
         {activeTab === "description" &&
           (description ? description : defaultDescription)}
         {activeTab === "additionalInfo" &&

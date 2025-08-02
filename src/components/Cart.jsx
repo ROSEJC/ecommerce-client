@@ -91,7 +91,7 @@ const Cart = () => {
     setProductTotal(total);
   }, [cartProduct]);
   return (
-    <div className="flex max-w-full w-full justify-center items-center h-full mb-20">
+    <div className="flex max-w-full w-full justify-center items-center mb-10">
       {login ? (
         cartProduct.length === 0 ? (
           <CartEmptyWarning />
@@ -131,7 +131,7 @@ const Cart = () => {
             </div>
 
             {/* Right: Order Summary & Address */}
-            <div className="w-full lg:w-[400px] space-y-4 pt-16">
+            <div className="w-full lg:w-[400px] space-y-6 pt-16 px-4 lg:px-0 bg-white dark:bg-zinc-900 rounded-xl shadow-sm dark:shadow-zinc-800 transition-colors">
               {/* Order Summary */}
               <OrderSummery items={cartProduct} />
               {/* Delivery Address */}

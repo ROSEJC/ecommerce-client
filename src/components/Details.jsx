@@ -113,7 +113,7 @@ const Detail = () => {
           <img
             src={`${defaultProduct.images[0]}`}
             alt="Main"
-            className="w-full rounded-lg border"
+            className="w-full rounded-lg border bg-white p-2 dark:bg-white"
           />
           <div className="flex flex-wrap gap-2">
             {defaultProduct.images.map((img, idx) => (
@@ -121,7 +121,7 @@ const Detail = () => {
                 key={idx}
                 src={`${img}`}
                 alt={`thumb-${idx}`}
-                className="w-24 max-w-full h-auto rounded border cursor-pointer hover:ring-2"
+                className="w-24 h-auto rounded border bg-white p-1 cursor-pointer hover:ring-2 dark:bg-white"
               />
             ))}
           </div>
@@ -129,31 +129,33 @@ const Detail = () => {
 
         {/* Right - Details */}
         <div className="">
-          <div className="border-b py-4">
-            <h1 className="text-2xl font-semibold">
+          <div className="border-b border-gray-200 dark:border-zinc-700 py-4">
+            <h1 className="text-2xl font-semibold text-black dark:text-white">
               {productData ? productData.name : defaultProduct.name}
             </h1>
-            <p className="text-gray-500">{defaultProduct.description}</p>
+            <p className="text-gray-600 dark:text-zinc-400">
+              {defaultProduct.description}
+            </p>
 
             {/* Rating */}
-            <div className="flex items-center text-green-600 font-semibold text-sm">
+            <div className="flex items-center text-green-600 dark:text-green-400 font-semibold text-sm mt-2">
               {Array.from({ length: 4 }).map((_, i) => (
-                <Star key={i} size={16} fill="green" strokeWidth={0} />
+                <Star key={i} size={16} fill="currentColor" strokeWidth={0} />
               ))}
-              <Star size={16} stroke="green" />
-              <span className="ml-2">(120)</span>
+              <Star size={16} stroke="currentColor" />
+              <span className="ml-2 text-black dark:text-white">(120)</span>
             </div>
           </div>
 
           {/* Price */}
           <div className="py-4 border-b space-y-1">
             <div className="flex items-center space-x-4">
-              <span className="text-2xl font-bold text-gray-800">
+              <span className="text-2xl font-bold text-gray-800 dark:text-white">
                 {(productData ? productData.price : defaultProduct.price) *
                   1000}{" "}
                 VND
               </span>
-              <span className="line-through text-gray-400">
+              <span className="line-through text-gray-400 dark:text-zinc-500">
                 {(productData ? productData.price : defaultProduct.price) *
                   1000 +
                   1000}{" "}
@@ -162,28 +164,28 @@ const Detail = () => {
             </div>
 
             {/* Stock */}
-            <div className="text-green-600 p-2 bg-green-200 rounded-lg text-xs inline-block font-semibold ">
+            <div className="text-green-600 dark:text-emerald-400 bg-green-100 dark:bg-green-900 px-3 py-1 rounded-full text-xs font-semibold inline-block">
               In Stock
             </div>
           </div>
           {/* Add to cart */}
           <div className="flex space-x-2 my-6">
             <button
-              className="flex flex-1 items-center justify-center gap-2 px-6 py-2 bg-green-800 hover:bg-green-900 text-white rounded-md shadow text-sm"
+              className="flex flex-1 items-center justify-center gap-2 px-6 py-2 bg-green-800 hover:bg-green-900 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white rounded-md shadow text-sm transition-colors"
               onClick={handleAddToCart}
             >
               <ShoppingBag className="w-5 h-5" />
               Add to Cart
             </button>
 
-            <button className="p-2 border rounded-md border-pink-200 ">
-              <Heart className="text-gray-600 w-5 h-5" />
+            <button className="p-2 border rounded-md border-pink-200 dark:border-pink-400">
+              <Heart className="text-gray-600 dark:text-pink-300 w-5 h-5" />
             </button>
           </div>
 
           {/* Expandable Info */}
           <div
-            className="flex items-center justify-between text-sm text-black cursor-pointer font-bold"
+            className="flex items-center justify-between text-sm text-black dark:text-white cursor-pointer font-bold"
             onClick={() => setIsExpanded(!isExpanded)}
           >
             <span>
@@ -205,7 +207,7 @@ const Detail = () => {
               isExpanded ? "max-h-96 opacity-100 mt-2" : "max-h-0 opacity-0"
             }`}
           >
-            <div className="text-sm text-gray-700 leading-relaxed px-1 pb-2">
+            <div className="text-sm text-gray-700 dark:text-gray-300 leading-relaxed px-1 pb-2">
               <ul className="list-disc ml-5 space-y-1">
                 <li>
                   Shape:{" "}
@@ -238,18 +240,20 @@ const Detail = () => {
           </div>
 
           {/* Bottom Icons */}
-          <div className="flex space-x-6 text-gray-600 text-sm mt-4">
+          <div className="flex space-x-6 text-gray-600 dark:text-gray-300 text-sm mt-4">
             <button
-              className="border border-orange-500 text-black  text-sm font-semibold rounded-lg mx-2 my-6 hover:bg-orange-700 hover:text-white"
+              className="border border-orange-500 text-black dark:text-white dark:bg-gray-800 text-sm font-semibold rounded-lg mx-2 my-6 dark:hover:bg-orange-700 hover:bg-orange-700 hover:text-white"
               onClick={handleCompareClick}
             >
               Compare
             </button>
             <div className="flex items-center space-x-1">
-              <Truck size={16} /> <span>Delivery & Return</span>
+              <Truck size={16} className="text-inherit" />
+              <span>Delivery & Return</span>
             </div>
             <div className="flex items-center space-x-1">
-              <Share2 size={16} /> <span>Share</span>
+              <Share2 size={16} className="text-inherit" />
+              <span>Share</span>
             </div>
           </div>
 
@@ -299,6 +303,7 @@ const Detail = () => {
           onClose={() => {
             setShowCompare(false);
           }}
+          defaultProduct={productData}
         />
       )}
     </div>

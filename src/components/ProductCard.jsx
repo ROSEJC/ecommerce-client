@@ -62,16 +62,16 @@ export default function ProductCard({
   };
 
   return (
-    <div className="border rounded-lg shadow-sm overflow-hidden w-full max-w-[18rem]">
+    <div className="border rounded-lg shadow-sm dark:shadow-none dark:border-black overflow-hidden w-full max-w-[18rem] bg-white dark:bg-gray-800 dark:text-white">
       {/* Hình ảnh sản phẩm */}
       <button
-        className="focus:outline-none focus:ring-0 active:outline-none hover:outline-none"
+        className="focus:outline-none focus:ring-0 active:outline-none hover:outline-none dark:bg-gray-800"
         onClick={handleCardClick}
       >
         <img
           src={image}
           alt="Product"
-          className="w-full object-cover transition-transform duration-300 ease-in-out hover:scale-105"
+          className="w-full object-cover transition-transform duration-300 ease-in-out hover:scale-105 rounded-lg"
         />
       </button>
 
@@ -81,33 +81,44 @@ export default function ProductCard({
         <p className="text-xs text-gray-400 uppercase">{category}</p>
 
         {/* Tên sản phẩm */}
-        <h3 className="text-sm font-semibold text-gray-900 truncate">{name}</h3>
+        <h3 className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">
+          {name}
+        </h3>
 
         {/* Đánh giá */}
-        <div className="flex items-center text-sm text-gray-400">
+        <div className="flex items-center text-sm text-gray-400 dark:text-gray-300">
           {[...Array(5)].map((_, i) => (
             <Star
               key={i}
-              className="w-4 h-4 text-green-500 fill-yellow-500 mr-1"
+              className="w-4 h-4 text-green-500 dark:text-green-400 fill-yellow-500 dark:fill-yellow-300 mr-1"
             />
           ))}
-          <span className="ml-1 text-gray-400">5 Reviews</span>
+          <span className="ml-1 text-gray-400 dark:text-gray-300">
+            5 Reviews
+          </span>
         </div>
 
         {/* Tồn kho */}
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-700 dark:text-gray-300">
           In Stock <span className="text-green-600 font-medium">{inStock}</span>
         </p>
 
         {/* Giá */}
         <div className="flex items-center space-x-2">
-          <span className="text-lg font-bold text-green-600">{price}</span>
-          <span className="text-sm line-through text-gray-400">{oldPrice}</span>
+          <span className="text-lg font-bold text-green-600 dark:text-green-400">
+            {price}
+          </span>
+          <span className="text-sm line-through text-gray-400 dark:text-gray-500">
+            {oldPrice}
+          </span>
         </div>
 
         {/* Nút Add to cart */}
         <button
-          className="flex items-center justify-center gap-2 bg-green-800 hover:bg-green-900 text-white px-4 py-2 rounded-3xl w-full max-w-[10rem] mt-2"
+          className="flex items-center justify-center gap-2 
+        bg-green-600 hover:bg-green-700 text-white 
+        dark:bg-green-800 dark:hover:bg-green-900 
+          px-4 py-2 rounded-3xl w-full max-w-[10rem] mt-2"
           onClick={handleAddToCart}
         >
           <ShoppingCart className="w-4 h-4" />

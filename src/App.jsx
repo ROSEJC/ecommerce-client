@@ -1,7 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+import { useState, useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -13,33 +11,59 @@ import Detail from "./components/Details";
 import SignupPage from "./components/SignupPage";
 import SearchModal from "./components/SearchModel";
 import Cart from "./components/Cart";
+
+import AdminRoute from "./components/AdminRoutes/AdminRoute";
+import MainLayout from "./Layouts/MainLayout";
+import AuthLayout from "./Layouts/AuthLayout";
+
 function App() {
   const [showSearch, setShowSearch] = useState(false);
   const [tokenValid, setTokenValid] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (darkMode) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
 
   return (
-    <div className="px-0 lg:px-[300px] h-fit">
-      <Router>
-        <div className="relative">
-          <Header key={tokenValid} onToggleSearch={() => setShowSearch(true)} />
-          <main className="min-h-[650px]">
-            <Routes>
-              <Route path="/home" element={<Home />} />
-              <Route path="/detail/:id" element={<Detail />} />
-              <Route
-                path="/login"
-                element={<LoginPage setTokenValid={setTokenValid} />}
+    <Router>
+      <div className="px-0 lg:px-[300px] h-fit dark:bg-gray-900 dark:text-white">
+        <Routes>
+          {/* Main layout routes */}
+          <Route
+            element={
+              <MainLayout
+                key={tokenValid}
+                onToggleSearch={() => setShowSearch(true)}
+                onToggleDarkMode={() => {
+                  setDarkMode(!darkMode);
+                }}
               />
-              <Route path="/signup" element={<SignupPage />} />
-              <Route path="/shop" element={<Shop />} />
-              <Route path="/cart" element={<Cart />} />
-            </Routes>
-          </main>
-          <Footer />
-          {showSearch && <SearchModal onClose={() => setShowSearch(false)} />}
-        </div>
-      </Router>
-    </div>
+            }
+          >
+            <Route path="/home" element={<Home />} />
+            <Route path="/detail/:id" element={<Detail />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/cart" element={<Cart />} />
+          </Route>
+
+          {/* Auth layout routes */}
+          <Route element={<AuthLayout />}>
+            <Route
+              path="/login"
+              element={<LoginPage setTokenValid={setTokenValid} />}
+            />
+            <Route path="/signup" element={<SignupPage />} />
+          </Route>
+        </Routes>
+
+        {showSearch && <SearchModal onClose={() => setShowSearch(false)} />}
+      </div>
+    </Router>
   );
 }
 
