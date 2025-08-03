@@ -11,10 +11,12 @@ import Detail from "./components/Details";
 import SignupPage from "./components/SignupPage";
 import SearchModal from "./components/SearchModel";
 import Cart from "./components/Cart";
+import OrderPage from "./components/OrderPage/OrderPageTemplate";
 
 import AdminRoute from "./components/AdminRoutes/AdminRoute";
 import MainLayout from "./Layouts/MainLayout";
 import AuthLayout from "./Layouts/AuthLayout";
+import FavoriteTable from "./components/FavoritePage/FavoriteTable";
 
 function App() {
   const [showSearch, setShowSearch] = useState(false);
@@ -31,7 +33,7 @@ function App() {
 
   return (
     <Router>
-      <div className="px-0 lg:px-[300px] h-fit dark:bg-gray-900 dark:text-white">
+      <div className="px-0 xl:px-[300px] lg:px-[100px] h-fit dark:bg-gray-900 dark:text-white">
         <Routes>
           {/* Main layout routes */}
           <Route
@@ -49,9 +51,12 @@ function App() {
             <Route path="/detail/:id" element={<Detail />} />
             <Route path="/shop" element={<Shop />} />
             <Route path="/cart" element={<Cart />} />
+            <Route path="/favorite" element={<FavoriteTable />} />
+            <Route path="/order" element={<OrderPage />} />
           </Route>
 
           {/* Auth layout routes */}
+          {/*No header and footer pages */}
           <Route element={<AuthLayout />}>
             <Route
               path="/login"

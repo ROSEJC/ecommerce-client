@@ -131,7 +131,7 @@ const Cart = () => {
             </div>
 
             {/* Right: Order Summary & Address */}
-            <div className="w-full lg:w-[400px] space-y-6 pt-16 px-4 lg:px-0 bg-white dark:bg-zinc-900 rounded-xl shadow-sm dark:shadow-zinc-800 transition-colors">
+            <div className="w-full lg:w-[400px] space-y-6 pt-16 px-4 lg:px-0 bg-white dark:bg-transparent rounded-xl shadow-sm dark:shadow-zinc-800 transition-colors">
               {/* Order Summary */}
               <OrderSummery items={cartProduct} />
               {/* Delivery Address */}

@@ -1,4 +1,6 @@
-import React from "react";
+import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
+
 import {
   Heart,
   Check,
@@ -21,7 +23,6 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { ShoppingBag } from "lucide-react";
 import CompareCard from "./Detail/CompareCard";
-
 const defaultProduct = {
   name: "Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18–55mm",
   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
@@ -44,10 +45,11 @@ const defaultProduct = {
 };
 
 const Detail = () => {
-  const { id } = useParams();
+  let { id } = useParams();
+  id = parseInt(id);
   const [showCompare, setShowCompare] = useState(false);
   const [productData, setProductData] = useState([]);
-
+  const [isFavorite, setIsFavorite] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
@@ -59,11 +61,101 @@ const Detail = () => {
         console.error("Lỗi khi lấy dữ liệu sản phẩm:", error);
       }
     };
-
     getData();
   }, [id]);
   const handleCompareClick = () => {
     setShowCompare(true);
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) return;
+
+    try {
+      const decoded = jwtDecode(token);
+      const now = Date.now() / 1000;
+
+      if (decoded.exp < now) {
+        localStorage.removeItem("token");
+        return;
+      }
+
+      const userId = decoded.userId;
+
+      const checkFavorite = async () => {
+        try {
+          const res = await axios.get(
+            `http://localhost:3000/favorite/${userId}`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          const isFav = res.data.some((fav) => fav.product.id === id);
+          console.log(res.data);
+          setIsFavorite(isFav);
+        } catch (err) {
+          console.error("Error fetching favorites:", err);
+        }
+      };
+
+      checkFavorite();
+    } catch (err) {
+      console.error("Invalid token");
+      localStorage.removeItem("token");
+    }
+  }, [id]);
+
+  const handleFavoriteClick = async () => {
+    const token = localStorage.getItem("token");
+    const now = Date.now() / 1000;
+    if (!token) return;
+
+    try {
+      const decoded = jwtDecode(token);
+      if (decoded.exp < now) {
+        console.log("Token expired");
+        localStorage.removeItem("token");
+        return;
+      }
+
+      const userId = decoded.userId;
+      if (!isFavorite) {
+        const response = await axios.post(
+          "http://localhost:3000/favorite/add",
+          {
+            userId,
+            productId: id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setIsFavorite(true);
+        console.log("Favorite added:", response.message);
+      } else {
+        const response = await axios.delete(
+          "http://localhost:3000/favorite/delete",
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            data: {
+              userId,
+              productId: id,
+            },
+          }
+        );
+        setIsFavorite(false);
+        console.log("Favorite removed:", response.data);
+      }
+    } catch (err) {
+      console.error("Error updating favorite:", err);
+    }
   };
 
   const handleAddToCart = () => {
@@ -98,7 +190,7 @@ const Detail = () => {
       } else {
         localStorage.removeItem("token");
         console.error("Phiên đăng nhập đã hết hạn");
-        navigate("/login"); // hoặc "/cart" nếu bạn muốn vậy
+        navigate("/login");
       }
     } else {
       console.error("Bạn cần đăng nhập để sử dụng chức năng này");
@@ -178,8 +270,22 @@ const Detail = () => {
               Add to Cart
             </button>
 
-            <button className="p-2 border rounded-md border-pink-200 dark:border-pink-400">
-              <Heart className="text-gray-600 dark:text-pink-300 w-5 h-5" />
+            <button
+              className="p-2 border rounded-md border-pink-200 dark:border-zinc-700 dark:bg-gray-800	"
+              onClick={handleFavoriteClick}
+            >
+              {isFavorite && (
+                <FaHeart
+                  className="text-red-600 hover:scale-110 transition-transform cursor-pointer"
+                  size={24}
+                />
+              )}
+              {!isFavorite && (
+                <FaRegHeart
+                  className="text-red-600 hover:scale-110 transition-transform cursor-pointer"
+                  size={24}
+                />
+              )}
             </button>
           </div>
 

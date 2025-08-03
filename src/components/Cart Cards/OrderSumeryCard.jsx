@@ -28,7 +28,8 @@ const OrderSummery = () => {
 
   useEffect(() => {
     countTotal();
-  }, [items]); // Gọi mỗi khi items thay đổi
+  }, [items]);
+
   useEffect(() => {
     const socket = io("http://localhost:3000");
 

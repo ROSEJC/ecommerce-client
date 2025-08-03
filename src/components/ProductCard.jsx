@@ -116,8 +116,7 @@ export default function ProductCard({
         {/* Nút Add to cart */}
         <button
           className="flex items-center justify-center gap-2 
-        bg-green-600 hover:bg-green-700 text-white 
-        dark:bg-green-800 dark:hover:bg-green-900 
+        bg-green-800 hover:bg-green-900 dark:bg-emerald-500 dark:hover:bg-emerald-600 text-white 
           px-4 py-2 rounded-3xl w-full max-w-[10rem] mt-2"
           onClick={handleAddToCart}
         >
