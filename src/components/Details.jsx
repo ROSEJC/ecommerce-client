@@ -32,11 +32,11 @@ const defaultProduct = {
   rating: 4,
   ratingCount: 120,
   images: [
-    "/airpod.png",
-    "/airpod.png",
-    "/airpod.png",
-    "/airpod.png",
-    "/airpod.png",
+    "https://cdn.shopify.com/s/files/1/0609/8154/3047/files/A3968Z11_TD01_V1.png?v=1721704000",
+    "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/a/tai-nghe-the-thao-anker-soundcore-v30i_1_.png",
+    "https://cdn2.cellphones.com.vn/insecure/rs:fill:0:358/q:90/plain/https://cellphones.com.vn/media/catalog/product/t/a/tai-nghe-khong-day-xiaomi-redmi-buds-5-6.png",
+    "https://www.tozostore.com/cdn/shop/files/nc2-mian01_5000x.webp?v=1737704354",
+    "https://www.jlab.com/cdn/shop/files/1_JBuds_Sport_ANC_4_Graphite_e0a807ba-6482-4b46-9ec8-d778b2097011.jpg?v=1720075309&width=1680",
   ],
   delivery: {
     free: true,
@@ -213,7 +213,7 @@ const Detail = () => {
         {/* Left - Image Gallery */}
         <div className="space-y-4">
           <img
-            src={`${defaultProduct.images[0]}`}
+            src={productData.image}
             alt="Main"
             className="w-full rounded-lg border bg-white p-2 dark:bg-white"
           />

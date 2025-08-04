@@ -159,6 +159,7 @@ const Cart = () => {
                         productQuantity={item.quantity}
                         shape={item.product?.shape}
                         price={item.product?.price}
+                        image={item.product.image}
                       />
                     ))}
                   </div>

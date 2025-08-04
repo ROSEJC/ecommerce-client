@@ -9,6 +9,7 @@ const ProductCart = ({
   productQuantity = 1,
   shape = "Hook",
   price = "1000",
+  image,
 }) => {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(productQuantity);
@@ -68,7 +69,7 @@ const ProductCart = ({
         className="overflow-hidden border border-zinc-200 dark:border-zinc-700 bg-white rounded-lg m-2 transition-colors"
       >
         <img
-          src="/airpod.png"
+          src={image}
           alt="Product"
           className="h-24 w-24 object-cover transition-transform duration-300 ease-in-out hover:scale-105 rounded-lg"
         />

@@ -16,7 +16,7 @@ const ImgCompare = ({ img1, img2, id_1, id_2, clickHandle }) => {
         }}
       >
         <img
-          src="/airpod.png"
+          src={img1}
           className="max-h-52 max-w-52 w-full h-full rounded-xl object-contain"
         />
       </button>
@@ -29,7 +29,7 @@ const ImgCompare = ({ img1, img2, id_1, id_2, clickHandle }) => {
         }}
       >
         <img
-          src="/airpod.png"
+          src={img2}
           className="max-h-52 max-w-52 w-full h-full rounded-xl object-contain"
         />
       </button>

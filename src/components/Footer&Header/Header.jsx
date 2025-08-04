@@ -5,7 +5,15 @@ import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { Sun, Moon } from "lucide-react";
 const Header = ({ onToggleSearch, onToggleDarkMode }) => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    const stored = localStorage.getItem("darkMode");
+    if (stored === null) {
+      localStorage.setItem("darkMode", "false");
+      return false;
+    }
+    return stored === "true";
+  });
+
   const [tokenValid, setTokenValid] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
   const navigate = useNavigate();
@@ -50,17 +58,34 @@ const Header = ({ onToggleSearch, onToggleDarkMode }) => {
       <div className="xl:mx-[300px] flex items-center justify-between py-4 px-6 ">
         {/* Left: Logos */}
         <div className="basis-1/3 flex items-center space-x-4">
-          <span className="font-bold text-xl text-blue-600 dark:text-blue-400">
-            Logo1
-          </span>
+          <button
+            className="bg-transparent"
+            onClick={() => {
+              navigate("/home");
+            }}
+          >
+            <span className="font-bold text-xl text-blue-600 dark:text-blue-400">
+              TechZone
+            </span>
+          </button>
         </div>
 
         {/* Center: Menu */}
         <nav className="basis-1/3 hidden md:flex text-zinc-600 dark:text-zinc-300 justify-center">
-          <button className="font-semibold text-sm bg-transparent border-none hover:text-green-600 dark:hover:text-green-400 hover:underline hover:decoration-2 transition">
+          <button
+            className="font-semibold text-sm bg-transparent border-none hover:text-green-600 dark:hover:text-green-400 hover:underline hover:decoration-2 transition"
+            onClick={() => {
+              navigate("/home");
+            }}
+          >
             Home
           </button>
-          <button className="font-semibold text-sm bg-transparent border-none hover:text-green-600 dark:hover:text-green-400 hover:underline hover:decoration-2 transition">
+          <button
+            className="font-semibold text-sm bg-transparent border-none hover:text-green-600 dark:hover:text-green-400 hover:underline hover:decoration-2 transition"
+            onClick={() => {
+              navigate("/shop");
+            }}
+          >
             Shop
           </button>
           <button className="font-semibold text-sm bg-transparent border-none hover:text-green-600 dark:hover:text-green-400 hover:underline hover:decoration-2 transition">

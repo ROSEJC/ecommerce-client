@@ -15,7 +15,7 @@ const RouteButton = ({ setChoice }) => {
           onClick={() => handleClick("Stem")}
           className={`px-4 py-2 rounded-3xl 
         ${
-          currentChoice === 1
+          currentChoice === "Stem"
             ? "bg-blue-400 text-white"
             : "bg-gray-200 text-black"
         } focus:outline-none focus:ring-0`}
@@ -27,7 +27,7 @@ const RouteButton = ({ setChoice }) => {
           onClick={() => handleClick("Bud")}
           className={`px-4 py-2 rounded-3xl 
         ${
-          currentChoice === 2
+          currentChoice === "Bud"
             ? "bg-blue-400 text-white"
             : "bg-gray-200 text-black"
         } focus:outline-none focus:ring-0`}
@@ -39,7 +39,7 @@ const RouteButton = ({ setChoice }) => {
           onClick={() => handleClick("Hook")}
           className={`px-4 py-2 rounded-3xl 
         ${
-          currentChoice === 3
+          currentChoice === "Hook"
             ? "bg-blue-400 text-white"
             : "bg-gray-200 text-black"
         } focus:outline-none focus:ring-0`}
@@ -51,7 +51,7 @@ const RouteButton = ({ setChoice }) => {
           onClick={() => handleClick("")}
           className={`px-4 py-2 rounded-3xl 
         ${
-          currentChoice === 4
+          currentChoice === ""
             ? "bg-blue-400 text-white"
             : "bg-gray-200 text-black"
         } focus:outline-none focus:ring-0`}

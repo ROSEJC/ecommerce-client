@@ -34,7 +34,7 @@ const OrderProductCard = ({ item, status, userId }) => {
           }}
         >
           <img
-            src="/airpod.png"
+            src={item.product.image}
             className="h-32 w-32 rounded-lg hover:scale-105 transition-all duration-300"
             alt="AirPods"
           />
@@ -82,6 +82,8 @@ const OrderProductCard = ({ item, status, userId }) => {
           productId={item.productId}
           orderItemId={item.id}
           userId={userId}
+          name={item.product.name}
+          img={item.product.image}
         />
       )}
     </div>

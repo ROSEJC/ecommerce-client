@@ -132,6 +132,7 @@ const CompareCard = ({ onClose, defaultProduct }) => {
                     setReady_1(false);
                   }}
                   name={product_1.name}
+                  image={product_1.image}
                 />
               )}
               {!ready_1 && !isSearchingProduct_1 && (
@@ -161,6 +162,7 @@ const CompareCard = ({ onClose, defaultProduct }) => {
                         brand={item.manufacturer}
                         shape={item.shape}
                         action={() => on_Product_1_Choose(item.id)}
+                        image={item.image}
                       />
                     ))}
                   </div>
@@ -175,6 +177,7 @@ const CompareCard = ({ onClose, defaultProduct }) => {
                     setReady_2(false);
                   }}
                   name={product_2.name}
+                  image={product_2.name}
                 />
               )}
               {!ready_2 && !isSearchingProduct_2 && (
@@ -204,6 +207,7 @@ const CompareCard = ({ onClose, defaultProduct }) => {
                         brand={item.manufacturer}
                         shape={item.shape}
                         action={() => on_Product_2_Choose(item.id)}
+                        image={item.image}
                       />
                     ))}
                   </div>
@@ -218,6 +222,8 @@ const CompareCard = ({ onClose, defaultProduct }) => {
               id_1={product_1.id}
               id_2={product_2.id}
               clickHandle={onClose}
+              img1={product_1.image}
+              img2={product_2.image}
             />
             {AttriButeToCompare.map((item, index) => (
               <AttributesCompare

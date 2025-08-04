@@ -10,7 +10,7 @@ const LoginWarning = () => {
   return (
     <div className="bg-white dark:bg-zinc-900 border border-gray-200 dark:border-zinc-700 rounded-xl max-w-[600px] w-full mx-auto flex flex-col items-center px-8 py-6 my-10 shadow-sm dark:shadow-zinc-800">
       <div className="text-2xl text-blue-600 dark:text-blue-400 font-bold">
-        LOGO
+        TechZone
       </div>
       <div className="text-xl font-semibold mb-4 text-gray-800 dark:text-white">
         WELCOME BACK

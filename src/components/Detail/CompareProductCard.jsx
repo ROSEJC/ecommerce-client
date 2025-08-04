@@ -7,6 +7,7 @@ const CompareProductCard = ({
   brand = "Toshiba",
   shape = "Hook",
   action,
+  image,
 }) => {
   return (
     <button
@@ -14,7 +15,7 @@ const CompareProductCard = ({
       onClick={action}
     >
       <div className="flex-shrink-0 overflow-hidden border border-gray-300 rounded-lg m-2">
-        <img src="/airpod.png" className="w-20 h-20 object-cover" />
+        <img src={image} className="w-20 h-20 object-cover" />
       </div>
 
       <div className="flex flex-col justify-center mx-4 text-start min-w-0 flex-grow">

@@ -113,10 +113,10 @@ export default function ProductCard({
         {/* Giá */}
         <div className="flex items-center space-x-2">
           <span className="text-lg font-bold text-green-600 dark:text-green-400">
-            {price}
+            {price * 1000}
           </span>
           <span className="text-sm line-through text-gray-400 dark:text-gray-500">
-            {oldPrice}
+            {oldPrice * 1000}
           </span>
         </div>
 

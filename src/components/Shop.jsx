@@ -60,6 +60,7 @@ const Shop = () => {
                 name={data.name}
                 price={data.price}
                 oldPrice={data.price + 1000}
+                image={data.image}
               />
             </div>
           ))}

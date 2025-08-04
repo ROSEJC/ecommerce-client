@@ -1,8 +1,8 @@
-const ProductPreshow = ({ searchingButtonClick, name }) => {
+const ProductPreshow = ({ searchingButtonClick, name, image }) => {
   return (
     <div className="max-w-max h-auto w-full text-center flex flex-col justify-center items-center">
       <img
-        src="/airpod.png"
+        src={image}
         className="h-40 w-40 rounded-xl shadow-lg dark:shadow-white"
       />
       <p className="my-4 text-xl text-center font-semibold text-black dark:text-white">

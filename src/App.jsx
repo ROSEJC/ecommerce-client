@@ -19,7 +19,14 @@ import FavoriteTable from "./components/FavoritePage/FavoriteTable";
 function App() {
   const [showSearch, setShowSearch] = useState(false);
   const [tokenValid, setTokenValid] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(() => {
+    const stored = localStorage.getItem("darkMode");
+    if (stored === null) {
+      localStorage.setItem("darkMode", "false"); // mặc định là sáng
+      return false;
+    }
+    return stored === "true"; // chuyển chuỗi thành boolean
+  });
 
   useEffect(() => {
     if (darkMode) {
@@ -40,7 +47,11 @@ function App() {
                 key={tokenValid}
                 onToggleSearch={() => setShowSearch(true)}
                 onToggleDarkMode={() => {
-                  setDarkMode(!darkMode);
+                  setDarkMode((prev) => {
+                    const newValue = !prev;
+                    localStorage.setItem("darkMode", newValue.toString());
+                    return newValue;
+                  });
                 }}
               />
             }

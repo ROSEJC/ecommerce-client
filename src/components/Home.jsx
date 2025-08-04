@@ -22,7 +22,7 @@ const Home = () => {
       maxPrice,
       search,
       page = 1,
-      limit = 10,
+      limit = 12,
       shape,
     }) => {
       const response = await axios.get("http://localhost:3000/product", {
@@ -66,10 +66,10 @@ const Home = () => {
             price={product.price}
             oldPrice={product.price + 1000}
             category={product.shape}
+            image={product.image}
           />
         ))}
       </div>
-      <PopularCategoryCard />
       <ShopByBrands />
     </div>
   );

@@ -63,7 +63,7 @@ const SearchItemCard = ({ product, action }) => {
         onClick={action}
       >
         <img
-          src="/airpod.png"
+          src={product.image}
           className="h-24 w-24 object-cover transition-transform duration-300 ease-in-out hover:scale-105"
         />
       </button>
