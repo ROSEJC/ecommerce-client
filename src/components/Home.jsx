@@ -6,8 +6,8 @@ import Banner from "../components/Banner";
 import { Route, ShieldPlus } from "lucide-react";
 import PopularCategoryCard from "../components/PopularCategory";
 import ShopByBrands from "../components/ShopByBrands";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./Footer&Header/Header";
+import Footer from "./Footer&Header/Footer";
 import { useEffect } from "react";
 
 import axios from "axios";

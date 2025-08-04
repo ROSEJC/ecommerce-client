@@ -8,7 +8,9 @@ import LoginWarning from "../Cart Cards/LoginWarning";
 
 const FavoriteTable = () => {
   const [favoriteProduct, setFavoriteProduct] = useState([]);
+  const [isLogin, setIsLogin] = useState(false);
   const [reload, setReload] = useState(false);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
 
@@ -23,6 +25,7 @@ const FavoriteTable = () => {
           localStorage.removeItem("token");
         } else {
           const getData = async () => {
+            setIsLogin(true);
             try {
               const response = await axios.get(
                 `http://localhost:3000/favorite/${userId}`,
@@ -33,6 +36,7 @@ const FavoriteTable = () => {
                 }
               );
               setFavoriteProduct(response.data);
+
               console.log(response.data);
             } catch (err) {
               console.error("Error fetching favorites:", err);
@@ -50,26 +54,32 @@ const FavoriteTable = () => {
 
   return (
     <>
-      {favoriteProduct.length === 0 ? (
-        <FavoriteEmpty />
+      {isLogin ? (
+        <>
+          {favoriteProduct.length === 0 ? (
+            <FavoriteEmpty />
+          ) : (
+            <div>
+              <FavoriteTitle />
+              {favoriteProduct.map((item, index) => (
+                <FavoriteTableItem
+                  onDelete={() => {
+                    setReload((prev) => !prev);
+                    console.log("Check");
+                  }}
+                  key={index}
+                  productName={item.product.name}
+                  shape={item.shape}
+                  price={item.product.price}
+                  id={item.productId}
+                  brand={item.product.manufacturer}
+                />
+              ))}
+            </div>
+          )}{" "}
+        </>
       ) : (
-        <div>
-          <FavoriteTitle />
-          {favoriteProduct.map((item, index) => (
-            <FavoriteTableItem
-              onDelete={() => {
-                setReload((prev) => !prev);
-                console.log("Check");
-              }}
-              key={index}
-              productName={item.product.name}
-              shape={item.shape}
-              price={item.product.price}
-              id={item.productId}
-              brand={item.product.manufacturer}
-            />
-          ))}
-        </div>
+        <LoginWarning />
       )}
     </>
   );

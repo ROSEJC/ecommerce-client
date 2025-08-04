@@ -1,7 +1,24 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import ShowResponseCard from "./Reviews/ShowResponseCard";
 
-const ProductTabs = ({ description, additionalInfo, reviews }) => {
+const ProductTabs = ({ description, additionalInfo, productId }) => {
   const [activeTab, setActiveTab] = useState("description");
+  const [reviews, setReviews] = useState([]);
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        console.log(productId);
+        const res = await axios.get(
+          `http://localhost:3000/reviews/${productId}`
+        );
+        setReviews(res.data);
+      } catch (error) {
+        console.error("Failed to fetch reviews:", error);
+      }
+    };
+    getData();
+  }, [productId]);
 
   const defaultDescription = `
     In ducimus quod sed eum repellendus ea fugiat. Pariatur et illo at iure harum.
@@ -54,10 +71,8 @@ const ProductTabs = ({ description, additionalInfo, reviews }) => {
           (additionalInfo ? additionalInfo : defaultAdditionalInfo)}
         {activeTab === "reviews" &&
           (reviews && reviews.length > 0
-            ? reviews.map((review, idx) => (
-                <p key={idx} className="mb-2">
-                  {review}
-                </p>
+            ? reviews.map((review, index) => (
+                <ShowResponseCard key={index} review={review} />
               ))
             : "No reviews")}
       </div>

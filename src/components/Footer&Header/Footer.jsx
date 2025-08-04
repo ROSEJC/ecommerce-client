@@ -1,5 +1,5 @@
 import React from "react";
-import ContactCard from "./ContactCard";
+import ContactCard from "../ContactCard";
 const Footer = () => {
   return (
     <footer className="bg-white dark:bg-black lg:-mx-[300px]">

@@ -1,14 +1,20 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ReviewCard from "../Reviews/ReviewCard";
 
-const OrderProductCard = ({ item, status }) => {
+const OrderProductCard = ({ item, status, userId }) => {
   const [showReviewButton, setShowReviewButton] = useState(false); // control visibility
+  const [showReviewCard, setShowReviewCard] = useState(false); // control visibility
   const navigate = useNavigate();
   useEffect(() => {});
   if (!item || !item.product) {
     console.warn("Missing item or item.product", item);
     return null;
   }
+
+  const onReviewClose = () => {
+    setShowReviewCard(false);
+  };
 
   useEffect(() => {
     if (status === "Received" && !item.reviewId) {
@@ -59,10 +65,24 @@ const OrderProductCard = ({ item, status }) => {
 
       {showReviewButton && (
         <div className="mt-2 flex items-center">
-          <button className="px-2 bg-orange-500 hover:bg-orange-700 text-white text-sm rounded-lg transition py-3">
+          <button
+            className="px-2 bg-orange-500 hover:bg-orange-700 text-white text-sm rounded-lg transition py-3"
+            onClick={() => {
+              setShowReviewCard(true);
+            }}
+          >
             Review
           </button>
         </div>
+      )}
+
+      {showReviewCard && (
+        <ReviewCard
+          onClose={onReviewClose}
+          productId={item.productId}
+          orderItemId={item.id}
+          userId={userId}
+        />
       )}
     </div>
   );

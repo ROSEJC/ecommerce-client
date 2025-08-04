@@ -62,7 +62,12 @@ const OrderCard = ({ order }) => {
       {/* Product List */}
       <div className="space-y-4 mb-6">
         {order.items.map((product, index) => (
-          <OrderProductCard item={product} key={index} status={order.status} />
+          <OrderProductCard
+            item={product}
+            key={index}
+            status={order.status}
+            userId={order.userId}
+          />
         ))}
       </div>
 

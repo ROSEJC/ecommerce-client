@@ -1,8 +1,8 @@
 import React from "react";
 import SidebarFilter from "./SidebarFilter";
 import ProductCard from "./ProductCard";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./Footer&Header/Header";
+import Footer from "./Footer&Header/Footer";
 import { useState } from "react";
 import { useEffect } from "react";
 import axios from "axios";

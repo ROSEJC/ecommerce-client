@@ -16,8 +16,8 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
 import ProductTabs from "./ProductTabs";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./Footer&Header/Header";
+import Footer from "./Footer&Header/Footer";
 import ProductCard from "./ProductCard";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
@@ -111,12 +111,15 @@ const Detail = () => {
   const handleFavoriteClick = async () => {
     const token = localStorage.getItem("token");
     const now = Date.now() / 1000;
-    if (!token) return;
+    if (!token) {
+      navigate("/favorite");
+      return;
+    }
 
     try {
       const decoded = jwtDecode(token);
       if (decoded.exp < now) {
-        console.log("Token expired");
+        navigate("/favorite");
         localStorage.removeItem("token");
         return;
       }
@@ -401,6 +404,7 @@ const Detail = () => {
             `
               : ``
           }
+          productId={id}
         />
       </div>
 
