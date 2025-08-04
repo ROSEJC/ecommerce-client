@@ -1,13 +1,13 @@
 import { AwardIcon, FastForward } from "lucide-react";
-import React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
+
 const LoginCard = ({ setTokenValid }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
   const handleLogin = async () => {
     try {
       const response = await axios.post("http://localhost:3000/login", {
@@ -16,9 +16,7 @@ const LoginCard = ({ setTokenValid }) => {
       });
       const user = response.data.user;
 
-      // Save user to localStorage
       localStorage.setItem("user", JSON.stringify(user));
-
       localStorage.setItem("token", user.token);
       setTokenValid(true);
       navigate("/home");
@@ -29,11 +27,9 @@ const LoginCard = ({ setTokenValid }) => {
   };
 
   return (
-    <div className="max-w-md w-full p-8 rounded-lg shadow-md space-y-8 bg-none items-center text-gray-800 my-8 text-shadow font-bold">
-      {/* Tiêu đề */}
+    <div className="max-w-md w-full p-8 rounded-lg shadow-md space-y-8 bg-none items-center text-gray-800 dark:text-white my-8 text-shadow font-bold">
       <h2 className="text-2xl font-bold text-start">Login</h2>
 
-      {/* Nhập email */}
       <div>
         <label className="block text-sm mb-1">Email</label>
         <input
@@ -44,7 +40,6 @@ const LoginCard = ({ setTokenValid }) => {
         />
       </div>
 
-      {/* Nhập mật khẩu */}
       <div>
         <label className="block text-sm mb-1">Password</label>
         <input
@@ -55,13 +50,23 @@ const LoginCard = ({ setTokenValid }) => {
         />
       </div>
 
-      {/* Nút đăng nhập */}
       <button
-        className="w-full bg-blue-600 font-semibold py-2 rounded-md hover:bg-blue-700 transition"
+        className="w-full bg-blue-600 font-semibold py-2 rounded-md hover:bg-blue-700 transition font-semibold text-white"
         onClick={handleLogin}
       >
         Sign In
       </button>
+
+      {/* Sign up redirect */}
+      <div className="text-sm text-center text-gray-600 dark:text-zinc-300 font-medium">
+        Don't have an account?{" "}
+        <button
+          className="text-blue-600 hover:underline font-semibold"
+          onClick={() => navigate("/signup")}
+        >
+          Sign up
+        </button>
+      </div>
     </div>
   );
 };

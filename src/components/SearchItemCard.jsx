@@ -4,8 +4,11 @@ import ProductCard from "./ProductCard";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
+import { useState } from "react";
+
 const SearchItemCard = ({ product, action }) => {
   const navigate = useNavigate();
+  const [showNotif, setShowNotif] = useState(false);
 
   const handleAddToCart = () => {
     const token = localStorage.getItem("token");
@@ -29,6 +32,10 @@ const SearchItemCard = ({ product, action }) => {
                 },
               }
             );
+            setShowNotif(true);
+
+            // Auto hide after 3 seconds
+            setTimeout(() => setShowNotif(false), 3000);
             console.log("Đã thêm vào giỏ hàng");
           } catch (err) {
             console.error(
@@ -62,7 +69,10 @@ const SearchItemCard = ({ product, action }) => {
       </button>
       <div className="mx-4">
         <p className="text-lg font-semibold mt-4">{product.name}</p>
-        <button className="flex items-center justify-center gap-2 px-6 py-2 bg-green-800 hover:bg-green-900 text-white rounded-md shadow text-sm my-4">
+        <button
+          className="flex items-center justify-center gap-2 px-6 py-2 bg-green-800 hover:bg-green-900 text-white rounded-md shadow text-sm my-4"
+          onClick={handleAddToCart}
+        >
           <ShoppingBag className="w-5 h-5" />
           Add to Cart
         </button>
@@ -76,6 +86,11 @@ const SearchItemCard = ({ product, action }) => {
           {product.price * 1000 + 1000} VND
         </p>
       </div>
+      {showNotif && (
+        <div className="fixed bottom-10 right-10 bg-green-100 dark:bg-green-800 text-green-900 dark:text-white px-6 py-5 rounded-2xl shadow-2xl z-50 text-lg font-semibold ">
+          Product has been added to your cart.
+        </div>
+      )}
     </div>
   );
 };

@@ -2,6 +2,8 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { ShoppingCart, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import AddToCartToast from "./Cart Cards/AddToCartToast";
+import { useState } from "react";
 
 export default function ProductCard({
   id = 1,
@@ -14,6 +16,7 @@ export default function ProductCard({
   reviewCount = 5,
   rating = 5,
 }) {
+  const [showNotif, setShowNotif] = useState(false);
   const navigate = useNavigate();
   const handleCardClick = () => {
     navigate(`/detail/${id}`);
@@ -40,6 +43,10 @@ export default function ProductCard({
                 },
               }
             );
+            setShowNotif(true);
+
+            // Auto hide after 3 seconds
+            setTimeout(() => setShowNotif(false), 3000);
             console.log("Đã thêm vào giỏ hàng");
           } catch (err) {
             console.error(
@@ -123,6 +130,12 @@ export default function ProductCard({
           <ShoppingCart className="w-4 h-4" />
           Add to Cart
         </button>
+
+        {showNotif && (
+          <div className="fixed bottom-10 right-10 bg-green-100 dark:bg-green-800 text-green-900 dark:text-white px-6 py-5 rounded-2xl shadow-2xl z-50 text-lg font-semibold tracking-wide">
+            Product has been added to your cart.
+          </div>
+        )}
       </div>
     </div>
   );

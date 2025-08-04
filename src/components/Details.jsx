@@ -47,6 +47,8 @@ const defaultProduct = {
 const Detail = () => {
   let { id } = useParams();
   id = parseInt(id);
+
+  const [showNotif, setShowNotif] = useState(false);
   const [showCompare, setShowCompare] = useState(false);
   const [productData, setProductData] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -183,6 +185,11 @@ const Detail = () => {
                 },
               }
             );
+
+            setShowNotif(true);
+
+            // Auto hide after 3 seconds
+            setTimeout(() => setShowNotif(false), 3000);
             console.log("Đã thêm vào giỏ hàng");
           } catch (err) {
             console.error("Lỗi khi thêm vào giỏ hàng:", err.message);
@@ -415,6 +422,12 @@ const Detail = () => {
           }}
           defaultProduct={productData}
         />
+      )}
+
+      {showNotif && (
+        <div className="fixed bottom-10 right-10 bg-green-100 dark:bg-green-800 text-green-900 dark:text-white px-6 py-5 rounded-2xl shadow-2xl z-50 text-lg font-semibold ">
+          Product has been added to your cart.
+        </div>
       )}
     </div>
   );

@@ -1,6 +1,8 @@
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { ShoppingCart } from "lucide-react";
+import { useState } from "react";
+
 import axios from "axios";
 const FavoriteTableItem = ({
   onDelete,
@@ -11,6 +13,8 @@ const FavoriteTableItem = ({
   brand = "ROSEJC Store",
 }) => {
   const navigate = useNavigate();
+
+  const [showNotif, setShowNotif] = useState(false);
 
   const handleDeleteFavorite = async () => {
     const token = localStorage.getItem("token");
@@ -63,6 +67,10 @@ const FavoriteTableItem = ({
                 },
               }
             );
+            setShowNotif(true);
+
+            // Auto hide after 3 seconds
+            setTimeout(() => setShowNotif(false), 3000);
             console.log("Đã thêm vào giỏ hàng");
           } catch (err) {
             console.error(
@@ -148,6 +156,11 @@ const FavoriteTableItem = ({
           Add to Cart
         </button>
       </div>
+      {showNotif && (
+        <div className="fixed bottom-10 right-10 bg-green-100 dark:bg-green-800 text-green-900 dark:text-white px-6 py-5 rounded-2xl shadow-2xl z-50 text-lg font-semibold ">
+          Product has been added to your cart.
+        </div>
+      )}
     </div>
   );
 };
