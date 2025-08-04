@@ -8,8 +8,6 @@ const RouteButton = ({ setChoice }) => {
   };
   return (
     <div className="flex justify-between items-center w-full mx-auto px-4 my-10">
-      {/* 4 button bên trái */}
-
       <div className="flex gap-2 text-lg">
         <button
           onClick={() => handleClick("Stem")}

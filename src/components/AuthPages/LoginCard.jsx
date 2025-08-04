@@ -8,11 +8,13 @@ const LoginCard = ({ setTokenValid }) => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+
   const navigate = useNavigate();
 
   const handleLogin = async () => {
     setLoading(true);
     setErrorMsg("");
+
     try {
       const response = await axios.post("http://localhost:3000/login", {
         email,
@@ -20,8 +22,10 @@ const LoginCard = ({ setTokenValid }) => {
       });
 
       const user = response.data.user;
+
       localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", user.token);
+
       setTokenValid(true);
       navigate("/home");
     } catch (err) {
@@ -34,17 +38,14 @@ const LoginCard = ({ setTokenValid }) => {
 
   return (
     <div className="max-w-md w-full p-8 rounded-xl shadow-xl space-y-8 bg-white/90 dark:bg-zinc-800/90 dark:text-white backdrop-blur-sm">
-      {/* Title */}
       <h2 className="text-3xl font-bold text-start">Welcome Back</h2>
 
-      {/* Error Message */}
       {errorMsg && (
         <div className="text-red-600 bg-red-100 dark:bg-red-800/40 px-4 py-2 rounded-md text-sm">
           {errorMsg}
         </div>
       )}
 
-      {/* Email Input */}
       <div>
         <label className="block text-sm mb-1 font-semibold">Email</label>
         <input
@@ -55,7 +56,6 @@ const LoginCard = ({ setTokenValid }) => {
         />
       </div>
 
-      {/* Password Input */}
       <div>
         <label className="block text-sm mb-1 font-semibold">Password</label>
         <input
@@ -66,7 +66,6 @@ const LoginCard = ({ setTokenValid }) => {
         />
       </div>
 
-      {/* Login Button */}
       <button
         disabled={loading}
         className={`w-full flex items-center justify-center gap-2 font-semibold py-2 rounded-md transition 

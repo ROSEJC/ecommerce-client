@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import LoginWarning from "./Cart Cards/LoginWarning";
-import CartEmptyWarning from "./Cart Cards/CartEmptyWarning";
-import OrderSummery from "./Cart Cards/OrderSumeryCard";
-import DeliveryCard from "./Cart Cards/DeliveryCard";
-import ProductCart from "./Cart Cards/ProductCart";
+import LoginWarning from "./LoginWarning";
+import CartEmptyWarning from "./CartEmptyWarning";
+import OrderSummery from "./OrderSumeryCard";
+import DeliveryCard from "./DeliveryCard";
+import ProductCart from "./ProductCart";
 import { ShoppingBag, TableOfContents } from "lucide-react";
 import axios from "axios";
-import ConfirmCard from "./Cart Cards/ConfirmCard";
+import ConfirmCard from "./ConfirmCard";
 import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const [login, setLogin] = useState(false);
@@ -132,6 +132,7 @@ const Cart = () => {
 
     setProductTotal(total);
   }, [cartProduct]);
+
   return (
     <div className="flex max-w-full w-full justify-center items-center mb-10">
       {login ? (
@@ -140,9 +141,7 @@ const Cart = () => {
         ) : (
           <>
             <div className="flex flex-col lg:flex-row space-x-6  w-full place-self-start m-0 ">
-              {/* Left: Cart Items */}
               <div className="flex-1">
-                {/* Shopping Cart Title */}
                 <div className="flex gap-1 my-4">
                   <ShoppingBag />{" "}
                   <div className="text-2xl font-semibold">Shopping Cart</div>
@@ -164,7 +163,6 @@ const Cart = () => {
                     ))}
                   </div>
 
-                  {/* Nút Reset Cart */}
                   <button
                     className="bg-orange-500 text-white text-sm font-semibold rounded-lg mx-2 my-6 hover:bg-orange-700"
                     onClick={resetCartHandle}
@@ -174,11 +172,8 @@ const Cart = () => {
                 </div>
               </div>
 
-              {/* Right: Order Summary & Address */}
               <div className="w-full lg:w-[400px] space-y-6 pt-16 px-4 lg:px-0 bg-white dark:bg-transparent rounded-xl shadow-sm dark:shadow-zinc-800 transition-colors">
-                {/* Order Summary */}
                 <OrderSummery items={cartProduct} onProceed={askingConfirm} />
-                {/* Delivery Address */}
                 <DeliveryCard />
               </div>
             </div>

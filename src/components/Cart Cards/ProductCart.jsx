@@ -26,6 +26,7 @@ const ProductCart = ({
 
   const updateProduct = async () => {
     const token = localStorage.getItem("token");
+
     if (isTokenValid(token)) {
       const decoded = jwtDecode(token);
       const userId = decoded.userId;
@@ -49,9 +50,11 @@ const ProductCart = ({
       navigate(0);
     }
   };
+
   const handleImgClick = () => {
     navigate(`/detail/${id}`);
   };
+
   const decrease = () => {
     if (quantity > 1) setQuantity(quantity - 1);
   };
@@ -59,9 +62,11 @@ const ProductCart = ({
   const increase = () => {
     setQuantity(quantity + 1);
   };
+
   useEffect(() => {
     updateProduct();
   }, [quantity]);
+
   return (
     <div className="flex max-w-full w-full">
       <button
@@ -107,9 +112,11 @@ const ProductCart = ({
               −
             </span>
           </button>
+
           <span className="text-lg font-medium w-4 text-center text-gray-800 dark:text-white">
             {quantity}
           </span>
+
           <button
             onClick={increase}
             className="w-8 h-8 rounded-md border border-gray-300 dark:border-zinc-600 flex items-center justify-center shadow-sm hover:bg-gray-100 dark:hover:bg-zinc-700 dark:bg-gray-700"

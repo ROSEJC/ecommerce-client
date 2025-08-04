@@ -4,7 +4,6 @@ const ConfirmCard = ({ onClose, handleCheckout }) => {
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/60" onClick={onClose} />
 
-      {/* Modal content */}
       <div className="relative z-50 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 p-6 rounded-lg shadow-lg max-w-[500px] mx-4 overflow-y-auto ">
         <div className="w-full flex justify-end items-center">
           <button
@@ -15,7 +14,6 @@ const ConfirmCard = ({ onClose, handleCheckout }) => {
           </button>
         </div>
 
-        {/* Your modal content goes here */}
         <div className="flex flex-col justify-start items-center">
           <div className="flex flex-col justify-center items-center my-4 space-y-2 mx-20">
             <img

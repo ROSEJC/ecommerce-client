@@ -2,13 +2,13 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import "./App.css";
 
-import Home from "./components/Home";
-import Shop from "./components/Shop";
-import LoginPage from "./components/LoginPage";
-import Detail from "./components/Details";
-import SignupPage from "./components/SignupPage";
-import SearchModal from "./components/SearchModel";
-import Cart from "./components/Cart";
+import Home from "./components/Home/Home";
+import Shop from "./components/Shop/Shop";
+import LoginPage from "./components/AuthPages/LoginPage";
+import Detail from "./components/Detail/Details";
+import SignupPage from "./components/AuthPages/SignupPage";
+import SearchModal from "./components/Search Model/SearchModel";
+import Cart from "./components/Cart Cards/Cart";
 import OrderPage from "./components/OrderPage/OrderPageTemplate";
 
 import AdminRoute from "./components/AdminRoutes/AdminRoute";

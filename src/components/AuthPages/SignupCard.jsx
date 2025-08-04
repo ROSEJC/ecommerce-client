@@ -10,6 +10,7 @@ const SignupCard = () => {
   const [name, setName] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
+
   const navigate = useNavigate();
 
   const handleSignup = async () => {
@@ -37,7 +38,6 @@ const SignupCard = () => {
 
   return (
     <div className="max-w-md w-full p-8 rounded-xl shadow-xl space-y-8 bg-white/90 dark:bg-zinc-800/90 dark:text-white backdrop-blur-sm">
-      {/* Title */}
       <h2 className="text-3xl font-bold text-start">Create Account</h2>
 
       {/* Error Message */}
@@ -47,7 +47,6 @@ const SignupCard = () => {
         </div>
       )}
 
-      {/* Name */}
       <div>
         <label className="block text-sm mb-1 font-semibold">Name</label>
         <input
@@ -58,7 +57,6 @@ const SignupCard = () => {
         />
       </div>
 
-      {/* Email */}
       <div>
         <label className="block text-sm mb-1 font-semibold">Email</label>
         <input
@@ -69,7 +67,6 @@ const SignupCard = () => {
         />
       </div>
 
-      {/* Password */}
       <div>
         <label className="block text-sm mb-1 font-semibold">Password</label>
         <input
@@ -80,7 +77,6 @@ const SignupCard = () => {
         />
       </div>
 
-      {/* Confirm Password */}
       <div>
         <label className="block text-sm mb-1 font-semibold">
           Confirm Password
@@ -93,7 +89,6 @@ const SignupCard = () => {
         />
       </div>
 
-      {/* Signup Button */}
       <button
         disabled={loading}
         className={`w-full flex items-center justify-center gap-2 font-semibold py-2 rounded-md transition 

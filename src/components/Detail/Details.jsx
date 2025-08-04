@@ -15,14 +15,13 @@ import {
 import { useEffect } from "react";
 import { useState } from "react";
 import { jwtDecode } from "jwt-decode";
-import ProductTabs from "./ProductTabs";
-import Header from "./Footer&Header/Header";
-import Footer from "./Footer&Header/Footer";
-import ProductCard from "./ProductCard";
 import { useNavigate, useParams } from "react-router-dom";
-import axios from "axios";
 import { ShoppingBag } from "lucide-react";
-import CompareCard from "./Detail/CompareCard";
+
+import ProductTabs from "./ProductTabs";
+import axios from "axios";
+import CompareCard from "./CompareCard";
+
 const defaultProduct = {
   name: "Canon EOS 250D 24.1MP Full HD WI-FI DSLR Camera with 18–55mm",
   description: "Lorem ipsum dolor sit amet consectetur adipisicing elit...",
@@ -53,6 +52,7 @@ const Detail = () => {
   const [productData, setProductData] = useState([]);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     const getData = async () => {

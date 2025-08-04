@@ -4,7 +4,6 @@ import CategoryCard from "./CategoryCard";
 const PopularCategoryCard = () => {
   return (
     <div className="my-10 w-full py-5 px-5 border dark:border-zinc-700 rounded-lg shadow-sm bg-white dark:bg-zinc-900 transition-colors duration-300">
-      {/* Title */}
       <div className="text-3xl border-b dark:border-zinc-700 pb-3 my-4 text-gray-900 dark:text-white">
         <strong>Popular Categories</strong>
       </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import ContactCard from "../ContactCard";
+import ContactCard from "./ContactCard";
 const Footer = () => {
   return (
     <footer className="bg-white dark:bg-black lg:-mx-[300px]">
@@ -12,12 +12,15 @@ const Footer = () => {
               content="Hoc Mon, HCM, VN"
             />
           </div>
+
           <div className="bg-white dark:bg-transparent">
             <ContactCard type="Phone" title="Call Us" content="0379 512 673" />
           </div>
+
           <div className="bg-white dark:bg-transparent">
             <ContactCard type="Clock" title="Working Hours" content="24/7" />
           </div>
+
           <div className="bg-white dark:bg-transparent">
             <ContactCard
               type="Mail"

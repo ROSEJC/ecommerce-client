@@ -54,6 +54,7 @@ const FavoriteTable = () => {
 
   return (
     <>
+      {/*If user not login yet, we have to tell them to login to use this feature, else if already login but dont have any thing in cart, tell them to have one*/}
       {isLogin ? (
         <>
           {favoriteProduct.length === 0 ? (
@@ -73,6 +74,7 @@ const FavoriteTable = () => {
                   price={item.product.price}
                   id={item.productId}
                   brand={item.product.manufacturer}
+                  image={item.product.image}
                 />
               ))}
             </div>

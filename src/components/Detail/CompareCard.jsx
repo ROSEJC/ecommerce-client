@@ -107,7 +107,6 @@ const CompareCard = ({ onClose, defaultProduct }) => {
         onClick={onClose}
       ></div>
 
-      {/* Modal content */}
       <div className="relative z-50 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg w-full max-w-[1200px] h-[90vh] mx-4 overflow-y-auto text-black dark:text-white">
         {/* Close button */}
         <button
@@ -117,14 +116,15 @@ const CompareCard = ({ onClose, defaultProduct }) => {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Nội dung tìm kiếm */}
         <h2 className="text-xl font-semibold mb-4">
           Which product is suitable for you?
         </h2>
-
+        {/*If any of 2 product has not been chosen, we will show the sign to tell user to choose product*/}
         {(!ready_1 || !ready_2) && (
           <div className="my-4 grid grid-cols-2 max-h-[70vh] h-full ">
+            {/*The left side for first product*/}
             <div className=" flex justify-center items-center border-r shadow-sm">
+              {/*If the product 1 is ready, we will show user some informations of chosen product*/}
               {ready_1 && !ready_2 && (
                 <ProductPreshow
                   searchingButtonClick={() => {
@@ -135,6 +135,7 @@ const CompareCard = ({ onClose, defaultProduct }) => {
                   image={product_1.image}
                 />
               )}
+              {/*If the first product not being chosen and user still not click on find product button, we will show user the product needed warning*/}
               {!ready_1 && !isSearchingProduct_1 && (
                 <ChooseProductWarning
                   searchingButtonClick={() => {
@@ -143,6 +144,8 @@ const CompareCard = ({ onClose, defaultProduct }) => {
                   }}
                 />
               )}
+
+              {/*Else show user searching bar*/}
               {isSearchingProduct_1 && (
                 <div className="w-full  h-full overflow-y-auto">
                   <div className="my-4 space-y-1 max-h-[400px] h-full mx-4">
@@ -169,6 +172,8 @@ const CompareCard = ({ onClose, defaultProduct }) => {
                 </div>
               )}
             </div>
+
+            {/*The right side for first product*/}
             <div className="flex justify-center items-center border-l shadow-sm dark:border-gray-500">
               {!ready_1 && ready_2 && (
                 <ProductPreshow
@@ -216,6 +221,7 @@ const CompareCard = ({ onClose, defaultProduct }) => {
             </div>
           </div>
         )}
+        {/*If both 2 product have been chosen, it will show the compare card*/}
         {ready_1 && ready_2 && (
           <div>
             <ImgCompare

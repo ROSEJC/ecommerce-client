@@ -1,6 +1,6 @@
 import React from "react";
 import { ShoppingBag } from "lucide-react";
-import ProductCard from "./ProductCard";
+import ProductCard from "../Others/ProductCard";
 import { useNavigate } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 import axios from "axios";
@@ -67,6 +67,7 @@ const SearchItemCard = ({ product, action }) => {
           className="h-24 w-24 object-cover transition-transform duration-300 ease-in-out hover:scale-105"
         />
       </button>
+
       <div className="mx-4">
         <p className="text-lg font-semibold mt-4">{product.name}</p>
         <button
@@ -77,6 +78,7 @@ const SearchItemCard = ({ product, action }) => {
           Add to Cart
         </button>
       </div>
+
       <div className="mx-4 ml-auto flex space-x-2">
         <p className="text-lg font-semibold mt-4 text-green-600">
           {product.price * 1000} VND
@@ -86,6 +88,7 @@ const SearchItemCard = ({ product, action }) => {
           {product.price * 1000 + 1000} VND
         </p>
       </div>
+
       {showNotif && (
         <div className="fixed bottom-10 right-10 bg-green-100 dark:bg-green-800 text-green-900 dark:text-white px-6 py-5 rounded-2xl shadow-2xl z-50 text-lg font-semibold ">
           Product has been added to your cart.

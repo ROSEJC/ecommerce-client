@@ -6,9 +6,9 @@ import { io } from "socket.io-client";
 
 const OrderSummery = ({ onProceed }) => {
   const [items, setItems] = useState([]);
-
   const [subTotal, setSubTotal] = useState(0);
   const navigate = useNavigate();
+
   const Discount = 2000;
 
   const countTotal = () => {
@@ -58,7 +58,7 @@ const OrderSummery = ({ onProceed }) => {
       });
 
       return () => {
-        socket.disconnect(); // <-- QUAN TRỌNG: đóng kết nối
+        socket.disconnect(); //
       };
     } catch (err) {
       console.error("Token decode error:", err);

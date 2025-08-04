@@ -1,7 +1,7 @@
 import { Key, X } from "lucide-react"; // hoặc bất kỳ icon nào bạn dùng
 import React, { useEffect, useState } from "react";
 
-import SearchItemCard from "./searchItemCard";
+import SearchItemCard from "./SearchItemCard";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const SearchModal = ({ onClose }) => {
@@ -42,7 +42,6 @@ const SearchModal = ({ onClose }) => {
           <X className="w-5 h-5" />
         </button>
 
-        {/* Nội dung tìm kiếm */}
         <h2 className="text-xl font-semibold mb-4">Product search bar</h2>
         <input
           type="text"

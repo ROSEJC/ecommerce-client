@@ -11,6 +11,7 @@ const FavoriteTableItem = ({
   price = 2000,
   shape = "Hook",
   brand = "ROSEJC Store",
+  image,
 }) => {
   const navigate = useNavigate();
 
@@ -111,7 +112,7 @@ const FavoriteTableItem = ({
           }}
         >
           <img
-            src="/airpod.png"
+            src={image}
             className="max-w-20 max-h-20 rounded-lg hover:scale-105 transition-transform duration-300"
           />
         </button>
@@ -123,22 +124,18 @@ const FavoriteTableItem = ({
         </div>
       </div>
 
-      {/* Hook */}
       <div className="col-span-2 text-sm items-center text-gray-700 dark:text-gray-300 hidden lg:flex">
         {shape}
       </div>
 
-      {/* Type */}
       <div className="col-span-2  items-center text-gray-700 dark:text-gray-300 hidden lg:flex">
         {brand}
       </div>
 
-      {/* In stock */}
       <div className="col-span-1 text-sm text-green-600 dark:text-green-400 lg:flex items-center hidden">
         In Stock
       </div>
 
-      {/* Price */}
       <div className="col-span-3 text-sm font-semibold text-gray-800 dark:text-white flex items-center lg:col-span-1">
         {price * 1000}
       </div>

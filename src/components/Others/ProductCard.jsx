@@ -2,7 +2,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { ShoppingCart, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import AddToCartToast from "./Cart Cards/AddToCartToast";
+import AddToCartToast from "../Cart Cards/AddToCartToast";
 import { useState } from "react";
 
 export default function ProductCard({

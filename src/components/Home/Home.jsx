@@ -1,13 +1,13 @@
 import React from "react";
 import { useState } from "react";
-import ProductCard from "../components/ProductCard";
-import RouteButton from "../components/HomeButtons";
-import Banner from "../components/Banner";
+import ProductCard from "../Others/ProductCard";
+import RouteButton from "./HomeButtons";
+import Banner from "./Banner";
 import { Route, ShieldPlus } from "lucide-react";
-import PopularCategoryCard from "../components/PopularCategory";
-import ShopByBrands from "../components/ShopByBrands";
-import Header from "./Footer&Header/Header";
-import Footer from "./Footer&Header/Footer";
+import PopularCategoryCard from "./PopularCategory";
+import ShopByBrands from "./ShopByBrands";
+import Header from "../Footer&Header/Header";
+import Footer from "../Footer&Header/Footer";
 import { useEffect } from "react";
 
 import axios from "axios";

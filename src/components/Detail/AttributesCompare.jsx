@@ -22,13 +22,11 @@ const AttributesCompare = ({ title = "Price", att1 = 1000, att2 = 2000 }) => {
   }
   return (
     <div className="grid grid-cols-12 gap-4 my-2">
-      {/* Cột 1: nhỏ hơn (3/12) */}
       <div className="col-span-2 p-4 text-center text-lg font-bold bg-gray-200 dark:text-orange-300 dark:bg-gray-900">
         {" "}
         {title}
       </div>
 
-      {/* Cột 2: lớn hơn (5/12) */}
       <div
         className={`col-span-5 p-4 text-center flex justify-center items-center text-lg hover:border hover:border-gray-300 ${
           isFirstBetter === 0
@@ -39,7 +37,6 @@ const AttributesCompare = ({ title = "Price", att1 = 1000, att2 = 2000 }) => {
         {att1}
       </div>
 
-      {/* Cột 3: lớn hơn (5/12) */}
       <div
         className={`col-span-5 p-4 text-center flex justify-center items-center text-lg  hover:border hover:border-gray-300 ${
           isFirstBetter === 1

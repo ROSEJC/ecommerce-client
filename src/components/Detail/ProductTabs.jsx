@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import ShowResponseCard from "./Reviews/ShowResponseCard";
+import ShowResponseCard from "../Reviews/ShowResponseCard";
 
 const ProductTabs = ({ description, additionalInfo, productId }) => {
   const [activeTab, setActiveTab] = useState("description");
