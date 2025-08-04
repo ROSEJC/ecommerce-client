@@ -18,7 +18,7 @@ const LoginCard = ({ setTokenValid }) => {
 
       // Save user to localStorage
       localStorage.setItem("user", JSON.stringify(user));
-      console.log("user token", user.token);
+
       localStorage.setItem("token", user.token);
       setTokenValid(true);
       navigate("/home");

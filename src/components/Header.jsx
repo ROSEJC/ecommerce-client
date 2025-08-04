@@ -114,7 +114,12 @@ const Header = ({ onToggleSearch, onToggleDarkMode }) => {
             <Heart className="w-5 h-5" />
           </button>
 
-          <button className="bg-transparent flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition px-2">
+          <button
+            className="bg-transparent flex items-center hover:text-blue-600 dark:hover:text-blue-400 transition px-2"
+            onClick={() => {
+              navigate("/order");
+            }}
+          >
             <List className="w-5 h-5" />
           </button>
 

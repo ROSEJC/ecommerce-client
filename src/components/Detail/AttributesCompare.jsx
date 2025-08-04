@@ -1,12 +1,17 @@
 const AttributesCompare = ({ title = "Price", att1 = 1000, att2 = 2000 }) => {
   let isFirstBetter = -1;
   const isInteger = Number.isInteger(Number(att1));
-
+  let isDiffernt = false;
   if (isInteger) {
     if (att1 > att2) {
       isFirstBetter = 0;
     } else if (att1 < att2) {
       isFirstBetter = 1;
+    }
+  }
+  if (!isInteger && title !== "Product Name") {
+    if (att1 !== att2) {
+      isDiffernt = true;
     }
   }
   if (title == "Price (VND)") {
@@ -29,7 +34,7 @@ const AttributesCompare = ({ title = "Price", att1 = 1000, att2 = 2000 }) => {
           isFirstBetter === 0
             ? "border border-b bg-orange-500 font-bold text-white"
             : ""
-        }`}
+        } ${isDiffernt ? "bg-gray-400 font-bold text-white" : ""}`}
       >
         {att1}
       </div>
@@ -40,7 +45,7 @@ const AttributesCompare = ({ title = "Price", att1 = 1000, att2 = 2000 }) => {
           isFirstBetter === 1
             ? "border border-b bg-orange-500 font-bold text-white"
             : ""
-        }`}
+        } ${isDiffernt ? "bg-gray-400 font-bold text-white" : ""}`}
       >
         {att2}
       </div>

@@ -7,11 +7,53 @@ import DeliveryCard from "./Cart Cards/DeliveryCard";
 import ProductCart from "./Cart Cards/ProductCart";
 import { ShoppingBag, TableOfContents } from "lucide-react";
 import axios from "axios";
+import ConfirmCard from "./Cart Cards/ConfirmCard";
+import { useNavigate } from "react-router-dom";
 const Cart = () => {
   const [login, setLogin] = useState(false);
   const [cartProduct, setCartProduct] = useState([]);
   const [productTotal, setProductTotal] = useState(0);
+  const [isAskingConfirm, setIsAskingConfirm] = useState(false);
 
+  const navigate = useNavigate();
+
+  const checkout = async (shippingAddress, paymentMethod) => {
+    const token = localStorage.getItem("token");
+    if (isTokenValid(token)) {
+      const decoded = jwtDecode(token);
+      const userId = decoded.userId;
+
+      try {
+        const response = await axios.post(
+          `http://localhost:3000/checkout/${userId}`,
+          {
+            shippingAddress,
+            paymentMethod,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        navigate(0);
+        console.log("Order placed successfully:", response.data);
+      } catch (error) {
+        console.error(
+          "Checkout failed:",
+          error.response?.data || error.message
+        );
+      }
+    }
+  };
+
+  const askingConfirm = () => {
+    setIsAskingConfirm(true);
+  };
+
+  const closeAskingConfirm = () => {
+    setIsAskingConfirm(false);
+  };
   const isTokenValid = (token) => {
     const now = Date.now() / 1000;
     const decoded = jwtDecode(token);
@@ -96,48 +138,59 @@ const Cart = () => {
         cartProduct.length === 0 ? (
           <CartEmptyWarning />
         ) : (
-          <div className="flex flex-col lg:flex-row space-x-6  w-full place-self-start m-0 ">
-            {/* Left: Cart Items */}
-            <div className="flex-1">
-              {/* Shopping Cart Title */}
-              <div className="flex gap-1 my-4">
-                <ShoppingBag />{" "}
-                <div className="text-2xl font-semibold">Shopping Cart</div>
-              </div>
-
-              {/* Danh sách sản phẩm */}
-              <div className="border border-gray-200 rounded-lg">
-                <div>
-                  {cartProduct.map((item, index) => (
-                    <ProductCart
-                      key={index}
-                      id={item.product?.id}
-                      name={item.product?.name}
-                      productQuantity={item.quantity}
-                      shape={item.product?.shape}
-                      price={item.product?.price}
-                    />
-                  ))}
+          <>
+            <div className="flex flex-col lg:flex-row space-x-6  w-full place-self-start m-0 ">
+              {/* Left: Cart Items */}
+              <div className="flex-1">
+                {/* Shopping Cart Title */}
+                <div className="flex gap-1 my-4">
+                  <ShoppingBag />{" "}
+                  <div className="text-2xl font-semibold">Shopping Cart</div>
                 </div>
 
-                {/* Nút Reset Cart */}
-                <button
-                  className="bg-orange-500 text-white text-sm font-semibold rounded-lg mx-2 my-6 hover:bg-orange-700"
-                  onClick={resetCartHandle}
-                >
-                  Reset Cart
-                </button>
+                {/* Danh sách sản phẩm */}
+                <div className="border border-gray-200 rounded-lg">
+                  <div>
+                    {cartProduct.map((item, index) => (
+                      <ProductCart
+                        key={index}
+                        id={item.product?.id}
+                        name={item.product?.name}
+                        productQuantity={item.quantity}
+                        shape={item.product?.shape}
+                        price={item.product?.price}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Nút Reset Cart */}
+                  <button
+                    className="bg-orange-500 text-white text-sm font-semibold rounded-lg mx-2 my-6 hover:bg-orange-700"
+                    onClick={resetCartHandle}
+                  >
+                    Reset Cart
+                  </button>
+                </div>
+              </div>
+
+              {/* Right: Order Summary & Address */}
+              <div className="w-full lg:w-[400px] space-y-6 pt-16 px-4 lg:px-0 bg-white dark:bg-transparent rounded-xl shadow-sm dark:shadow-zinc-800 transition-colors">
+                {/* Order Summary */}
+                <OrderSummery items={cartProduct} onProceed={askingConfirm} />
+                {/* Delivery Address */}
+                <DeliveryCard />
               </div>
             </div>
 
-            {/* Right: Order Summary & Address */}
-            <div className="w-full lg:w-[400px] space-y-6 pt-16 px-4 lg:px-0 bg-white dark:bg-transparent rounded-xl shadow-sm dark:shadow-zinc-800 transition-colors">
-              {/* Order Summary */}
-              <OrderSummery items={cartProduct} />
-              {/* Delivery Address */}
-              <DeliveryCard />
-            </div>
-          </div>
+            {isAskingConfirm && (
+              <ConfirmCard
+                onClose={closeAskingConfirm}
+                handleCheckout={() =>
+                  checkout("123 Main Street, Tokyo, Japan", "Pay when receive")
+                }
+              />
+            )}
+          </>
         )
       ) : (
         <LoginWarning />

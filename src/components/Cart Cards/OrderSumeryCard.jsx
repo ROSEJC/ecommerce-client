@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 import { io } from "socket.io-client";
 
-const OrderSummery = () => {
+const OrderSummery = ({ onProceed }) => {
   const [items, setItems] = useState([]);
 
   const [subTotal, setSubTotal] = useState(0);
@@ -88,7 +88,13 @@ const OrderSummery = () => {
         </div>
       </div>
 
-      <button className="w-full py-3 my-4 rounded-2xl font-semibold text-white bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 transition-all duration-300 shadow-md hover:shadow-lg dark:from-zinc-800 dark:to-zinc-700 dark:hover:from-zinc-700 dark:hover:to-zinc-600">
+      <button
+        className="w-full py-3 my-4 rounded-2xl font-semibold text-white bg-gradient-to-r 
+        from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 transition-all 
+        duration-300 shadow-md hover:shadow-lg dark:from-zinc-800 dark:to-zinc-700 
+        dark:hover:from-zinc-700 dark:hover:to-zinc-600"
+        onClick={onProceed}
+      >
         Proceed to Checkout
       </button>
     </div>

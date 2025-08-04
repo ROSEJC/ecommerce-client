@@ -1,17 +1,32 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const OrderProductCard = ({ item }) => {
-  const [showReviewButton] = useState(false); // control visibility
-
+const OrderProductCard = ({ item, status }) => {
+  const [showReviewButton, setShowReviewButton] = useState(false); // control visibility
+  const navigate = useNavigate();
+  useEffect(() => {});
   if (!item || !item.product) {
     console.warn("Missing item or item.product", item);
     return null;
   }
 
+  useEffect(() => {
+    if (status === "Received" && !item.reviewId) {
+      setShowReviewButton(true);
+    } else {
+      setShowReviewButton(false);
+    }
+  }, [status, item.reviewId]);
+
   return (
     <div className="p-4 border rounded-md bg-gray-50 dark:bg-gray-800 flex justify-between">
       <div className="flex space-x-2">
-        <button className="p-0 m-0 border-none bg-transparent rounded-none ">
+        <button
+          className="p-0 m-0 border-none bg-transparent rounded-none "
+          onClick={() => {
+            navigate(`/detail/${item.productId}`);
+          }}
+        >
           <img
             src="/airpod.png"
             className="h-32 w-32 rounded-lg hover:scale-105 transition-all duration-300"
@@ -36,7 +51,7 @@ const OrderProductCard = ({ item }) => {
             </span>{" "}
             | Price:{" "}
             <span className="font-semibold text-green-600">
-              {item.price.toLocaleString()}₫
+              {(item.price * 1000).toLocaleString()}₫
             </span>
           </p>
         </div>
