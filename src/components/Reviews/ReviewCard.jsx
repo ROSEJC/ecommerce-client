@@ -20,7 +20,7 @@ const ReviewCard = ({
     }
 
     try {
-      const res = await axios.post("http://localhost:3000/api/reviews", {
+      const res = await axios.post("http://localhost:3000/reviews/add", {
         productId: parseInt(productId),
         rating,
         comment: reviewText,

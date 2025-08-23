@@ -16,7 +16,7 @@ const LoginCard = ({ setTokenValid }) => {
     setErrorMsg("");
 
     try {
-      const response = await axios.post("http://localhost:3000/login", {
+      const response = await axios.post("http://localhost:3000/auth/login", {
         email,
         password,
       });

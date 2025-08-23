@@ -21,7 +21,7 @@ const SignupCard = () => {
     }
     setLoading(true);
     try {
-      await axios.post("http://localhost:3000/signup", {
+      await axios.post("http://localhost:3000/auth/signup", {
         email,
         name,
         password,

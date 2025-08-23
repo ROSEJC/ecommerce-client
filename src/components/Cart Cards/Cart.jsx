@@ -25,7 +25,7 @@ const Cart = () => {
 
       try {
         const response = await axios.post(
-          `http://localhost:3000/checkout/${userId}`,
+          `http://localhost:3000/cart/checkout/${userId}`,
           {
             shippingAddress,
             paymentMethod,
