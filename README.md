@@ -1,12 +1,30 @@
-# React + Vite
+# TechZone クライアント
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**TechZone** は、ヘッドホン販売のための EC サイトです。このリポジトリは、React と Tailwind CSS を使って構築されたフロントエンド部分です。Axios を通じてバックエンドと通信し、基本的な eコマース機能を実現しています。
 
-Currently, two official plugins are available:
+## 主な機能
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 商品一覧と詳細の表示
+- カートに追加して購入
+- ユーザー登録とログイン
+- 注文履歴とレビュー表示・投稿
+- ダークモード対応
 
-## Expanding the ESLint configuration
+## 使用技術
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Tailwind CSS
+- Axios
+- React Router DOM
+- Context API
+- Lucide-react（アイコン）
+
+## セットアップ手順
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+フロントエンドはデフォルトで `http://localhost:3000` のバックエンドに接続します（`.env` ファイルで変更可能）。

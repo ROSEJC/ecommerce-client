@@ -10,6 +10,9 @@ import SignupPage from "./components/AuthPages/SignupPage";
 import SearchModal from "./components/Search Model/SearchModel";
 import Cart from "./components/Cart Cards/Cart";
 import OrderPage from "./components/OrderPage/OrderPageTemplate";
+import SellerDashboard from "./components/Seller/SellerDashboard";
+import OrderConfirmation from "./components/Seller/OrderConfirmation";
+import AddProduct from "./components/Seller/AddProduct";
 
 import AdminRoute from "./components/AdminRoutes/AdminRoute";
 import MainLayout from "./Layouts/MainLayout";
@@ -62,6 +65,9 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/favorite" element={<FavoriteTable />} />
             <Route path="/order" element={<OrderPage />} />
+            <Route path="/dashboard" element={<SellerDashboard />} />
+            <Route path="/orderConfirm" element={<OrderConfirmation />} />
+            <Route path="/product/add" element={<AddProduct />} />
           </Route>
 
           {/* Auth layout routes */}
