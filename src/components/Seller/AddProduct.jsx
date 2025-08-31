@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Upload, PlusCircle } from "lucide-react";
 import InputField from "./InputField";
 import CollapsibleSection from "./CollapsibleSection ";
 import ImageUploadByLink from "./ImageUploadByLink";
+import axios from "axios";
 export default function AddProduct() {
+  const [url, setUrl] = useState("");
+
   const [formData, setFormData] = useState({
     name: "",
     description: "",
     price: "",
     stock: "",
-    images: [],
+    image: "",
     brand: "",
     category: "",
 
@@ -30,7 +33,15 @@ export default function AddProduct() {
     manufacturer: "",
   });
 
-  const [previewImages, setPreviewImages] = useState([]);
+  const addImage = (url) => {
+    setFormData((prev) => ({
+      ...prev,
+      image: url, // gán thẳng string
+    }));
+  };
+  useEffect(() => {
+    addImage(url);
+  }, [url]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -45,35 +56,24 @@ export default function AddProduct() {
     setFormData((prev) => ({ ...prev, [field]: values }));
   };
 
-  const handleImageUpload = (e) => {
-    const files = Array.from(e.target.files);
-    setFormData((prev) => ({ ...prev, images: files }));
-    setPreviewImages(files.map((file) => URL.createObjectURL(file)));
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("New product:", formData);
-    alert("Product added successfully!");
+    try {
+      const res = await axios.post(
+        "http://localhost:3000/product/add",
+        formData
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
     <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 p-4">
       {/* Left - Upload images */}
       <div className="space-y-4">
-        <ImageUploadByLink />
-
-        {/* preview ảnh */}
-        <div className="flex flex-wrap gap-2">
-          {previewImages.map((src, idx) => (
-            <img
-              key={idx}
-              src={src}
-              alt="preview"
-              className="w-24 h-24 object-cover rounded border bg-white dark:bg-gray-700 p-1"
-            />
-          ))}
-        </div>
+        <ImageUploadByLink setUrl={setUrl} />
       </div>
 
       {/* Right - Product details form */}

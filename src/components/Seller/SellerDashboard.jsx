@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import axios from "axios";
+
 import {
   BarChart,
   Bar,
@@ -6,18 +9,19 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
+import { useState } from "react";
 
 export default function SellerDashboard() {
   // Dữ liệu mẫu
-  const stats = {
+  const [stats, setStats] = useState({
     revenueToday: "$1,250",
     orders: 87,
     stock: 342,
     customers: 15,
     repeatRate: "42%",
-  };
+  });
 
-  const orderData = [
+  let orderData = [
     { name: "Mon", orders: 12 },
     { name: "Tue", orders: 19 },
     { name: "Wed", orders: 8 },
@@ -27,19 +31,31 @@ export default function SellerDashboard() {
     { name: "Sun", orders: 10 },
   ];
 
-  const topProducts = [
+  const [topProducts, setTopProducts] = useState([
     { name: "Áo thun basic", sold: 120 },
     { name: "Quần jeans", sold: 95 },
     { name: "Áo sơ mi", sold: 80 },
     { name: "Giày sneaker", sold: 76 },
     { name: "Túi tote", sold: 54 },
-  ];
+  ]);
 
   const alerts = [
     "⚠️ Sản phẩm 'Áo thun basic' sắp hết hàng",
     "📦 Bạn có 3 đơn hàng mới cần xử lý",
   ];
 
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get("http://localhost:3000/seller/dashboard");
+      setStats(res.data.stats);
+      setTopProducts(res.data.topProductsData);
+    };
+    try {
+      getData();
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
   return (
     <div className="p-6 min-h-screen bg-gray-50 dark:bg-gray-900">
       <h1 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white">
@@ -49,11 +65,11 @@ export default function SellerDashboard() {
       {/* Overview */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
         {[
-          { label: "Doanh thu hôm nay", value: stats.revenueToday },
-          { label: "Tổng đơn hàng", value: stats.orders },
-          { label: "Tồn kho", value: stats.stock },
-          { label: "Khách mới", value: stats.customers },
-          { label: "Khách quay lại", value: stats.repeatRate },
+          { label: "Today's Revenue", value: stats.revenueToday },
+          { label: "Total Orders", value: stats.orders },
+          { label: "Stock", value: stats.stock },
+          { label: "New Customers", value: stats.customers },
+          { label: "Returning Customers", value: stats.repeatRate },
         ].map((item, i) => (
           <div
             key={i}
@@ -72,7 +88,7 @@ export default function SellerDashboard() {
       {/* Orders Chart */}
       <div className="mb-8 shadow-md rounded-2xl bg-white dark:bg-gray-800 p-6">
         <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-          Đơn hàng theo tuần
+          Weekly Orders
         </h2>
         <ResponsiveContainer width="100%" height={250}>
           <BarChart data={orderData}>
@@ -83,7 +99,7 @@ export default function SellerDashboard() {
                 backgroundColor: "rgba(31, 41, 55, 0.9)", // dark:bg-gray-800
                 borderRadius: "0.5rem",
                 border: "none",
-                color: "#fff", // chữ trắng
+                color: "#fff", // white text
               }}
               itemStyle={{
                 color: "#e5e7eb", // text-gray-200
@@ -97,7 +113,7 @@ export default function SellerDashboard() {
       {/* Top Products */}
       <div className="mb-8 shadow-md rounded-2xl bg-white dark:bg-gray-800 p-6">
         <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-          Top sản phẩm bán chạy
+          Best-Selling Products
         </h2>
         <ul className="space-y-2">
           {topProducts.map((p, i) => (
@@ -117,7 +133,7 @@ export default function SellerDashboard() {
       {/* Alerts */}
       <div className="shadow-md rounded-2xl bg-white dark:bg-gray-800 p-6">
         <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-white">
-          Thông báo
+          Notifications
         </h2>
         <ul className="space-y-2">
           {alerts.map((a, i) => (

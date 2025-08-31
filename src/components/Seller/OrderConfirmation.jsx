@@ -1,4 +1,6 @@
+import axios from "axios";
 import React, { useState } from "react";
+import { useEffect } from "react";
 
 export default function OrderConfirmation() {
   // Sample data
@@ -29,6 +31,20 @@ export default function OrderConfirmation() {
     },
   ]);
 
+  useEffect(() => {
+    const getData = async () => {
+      const res = await axios.get("http://localhost:3000/seller/orders");
+      if (res.data) {
+        setOrders(res.data);
+      }
+    };
+
+    try {
+      getData();
+    } catch (err) {
+      console.log(err);
+    }
+  });
   const [expanded, setExpanded] = useState(null);
 
   const handleConfirm = (id) => {

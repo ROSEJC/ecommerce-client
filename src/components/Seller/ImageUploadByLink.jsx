@@ -1,14 +1,13 @@
 import { useState } from "react";
 
-const ImageUploadByLink = ({ value, onChange }) => {
-  const [url, setUrl] = useState(value || "");
+const ImageUploadByLink = ({ value, onChange, setUrl }) => {
   const [step, setStep] = useState("choose");
   // "choose" | "input" | "preview"
-
+  const [uiUrl, setUiUrl] = useState(value || "");
   const handleConfirm = () => {
-    if (url.trim()) {
+    if (uiUrl.trim()) {
       setStep("preview");
-      if (onChange) onChange(url);
+      if (onChange) onChange(uiUrl);
     }
   };
 
@@ -43,8 +42,11 @@ const ImageUploadByLink = ({ value, onChange }) => {
           <input
             type="text"
             placeholder="Paste image link..."
-            value={url}
-            onChange={(e) => setUrl(e.target.value)}
+            value={uiUrl}
+            onChange={(e) => {
+              setUrl(e.target.value);
+              setUiUrl(e.target.value);
+            }}
             className="flex-1 p-2 border rounded-md text-black"
           />
           <button
@@ -60,7 +62,7 @@ const ImageUploadByLink = ({ value, onChange }) => {
       {step === "preview" && (
         <div className="relative mt-2">
           <img
-            src={url}
+            src={uiUrl}
             alt="Uploaded preview"
             className="w-full h-1/2 object-cover border rounded-lg"
           />
